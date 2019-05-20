@@ -29,12 +29,11 @@ class especialistCreate extends Component {
     this.ref.add({
       name,
       CRM,
-      author
+      
     }).then((docRef) => {
       this.setState({
         name: '',
         CRM: '',
-        author: ''
       });
       this.props.history.push("/")
     })
@@ -44,7 +43,7 @@ class especialistCreate extends Component {
   }
 
   render() {
-    const { name, CRM, author } = this.state;
+    const { name, CRM } = this.state;
     return (
       <div>
         <Navbar />
@@ -66,10 +65,6 @@ class especialistCreate extends Component {
               <div class="form-group">
                 <label for="description">CRM:</label>
                 <input type="text" class="form-control" name="CRM" onChange={this.onChange} placeholder="CRM" />
-              </div>
-              <div class="form-group">
-                <label for="author">Valor:</label>
-                <input type="text" class="form-control" name="author" value={author} onChange={this.onChange} placeholder="valor" />
               </div>
               <button type="submit" class="btn btn-success">Adicionar</button>
             </form>

@@ -19,13 +19,12 @@ class Especialist extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const Especialist = [];
     querySnapshot.forEach((doc) => {
-      const { name, CRM, author } = doc.data();
+      const { name, CRM } = doc.data();
       Especialist.push({
         key: doc.id,
         doc, // DocumentSnapshot
         name,
         CRM,
-        author,
       });
     });
     this.setState({
@@ -47,28 +46,29 @@ class Especialist extends Component {
                 <div className="card">
                   <div className="card-header">
                     <h4> Lista de Especialistas</h4>
+                    <div class="card-header-action">
                     <h4><Link to="/especialistCreate" className="btn btn-primary">Adicionar Especialista</Link></h4>
+                  </div>
                   </div>
                   <div className="card-body">
                     <div className="table-responsive">
-                    {this.state.Especialist.map(Especialist =>
                       <table className="table table-bordered table-md">
                         <tr>
-                          <th>#</th>
+                          
                           <th>Nome</th>
                           <th>CRM</th>
-                          <th>Status</th>
                           <th>Ação</th>
+                          <th>Agenda</th>
                         </tr>
+                        {this.state.Especialist.map(Especialist =>
                         <tr>
-                          <td>1</td>
                           <td>{Especialist.name}</td>
                           <td>{Especialist.CRM}</td>
-                          <td><div className="badge badge-success">Active</div></td>
-                          <td><Link className="btn btn-secondary" to={`/especialistShow/${Especialist.key}`}>Detalhes</Link></td>
+                          <td><Link className="btn btn-secondary" to={`/especialistShow/${Especialist.key}`}>Editar</Link></td>
+                          <td><Link className="btn btn-secondary">Adicionar</Link></td>
                         </tr>
+                         )}
                       </table>
-                      )}
                     </div>
                   </div>
                   

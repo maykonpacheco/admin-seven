@@ -39,43 +39,45 @@ class Queries extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-      
-      <div class="container">
+      <Navbar />
         
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Lista de Consultas
-            </h3>
-          </div>
-          <div class="panel-body">
-            <h4><Link to="/create" class="btn btn-primary">Adicionar Consulta</Link></h4>
-            <table class="table table-stripe">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Descrição</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.boards.map(board =>
-                  <tr>
-                    <td><Link to={`/show/${board.key}`}>{board.title}</Link></td>
-                    <td>{board.description}</td>
-                    <td>{board.author}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      </div>
-      
-    );
-  }
-}
+      <div className="row">
+          <div className="col-md-12">
+            <div className="card">
+              <div className="card-header">
+                <h4> Lista de Consultas</h4>
+                <div class="card-header-action">
+                <h4><Link to="/create" class="btn btn-primary">Adicionar Consulta</Link></h4>
+              </div>
+              </div>
+              <div className="card-body">
+                <div className="table-responsive">
+                  <table className="table table-bordered table-md">
+                    <tr>
+                      <th>Nome</th>
+                      <th>Descrição</th>
+                      <th>Valor </th>
+                      <th>Ação</th>
+                    </tr>
+                    {this.state.boards.map(board =>
 
+                    <tr>
+                    <td>{board.title}</td>
+                      <td>{board.description}</td>
+                      <td>{board.author}</td>
+                      <td><Link to={`/show/${board.key}`}>Editar</Link></td>
+                    </tr>
+                      )}
+                  </table>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          </div>
+  </div>
+  
+);
+}
+}
 export default Queries;
