@@ -11,6 +11,8 @@ import especialistCreate from './components/Especialist/Create';
 import especialistEdit from './components/Especialist/Edit';
 import especialistShow from './components/Especialist/Show';
 
+import Agenda from './components/Agenda';
+
 import Agendamentos from './components/Agendamentos';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -21,6 +23,7 @@ const Routes = () => (
 <BrowserRouter>
       <Switch>
         <Route exact path='/' component={Agendamentos} />
+        <Route exact path='/Agenda' component={Agenda} />
         <Route exact path='/Queries' component={Queries} />
         <Route exact path='/edit/:id' component={Edit} />
         <Route exact path='/create' component={Create} />
