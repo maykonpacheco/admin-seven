@@ -41,7 +41,6 @@ class Especialist extends Component {
       <div>
           <Navbar />
             
-          <div className="row">
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-header">
@@ -75,7 +74,6 @@ class Especialist extends Component {
                 </div>
               </div>
               </div>
-      </div>
       
     );
   }

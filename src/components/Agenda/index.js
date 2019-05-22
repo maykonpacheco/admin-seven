@@ -10,7 +10,7 @@ class Agenda extends Component {
         <div>
             <Navbar />
         <div class="col-md-12">
-              <div class="card cardschedule">
+              <div class="card cardcardschedule">
                 <div class="card-header">
                   <h4>Tempo médio de consulta</h4>
                   <div class="card-header-action">

@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './styles.css';
-import firebase from '../../firebase';
-import Navbar from '../Navbar';
-
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./styles.css";
+import firebase from "../../firebase";
+import Navbar from "../Navbar";
 
 class Queries extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('boards');
+    this.ref = firebase.firestore().collection("boards");
     this.unsubscribe = null;
     this.state = {
       boards: []
     };
   }
 
-  onCollectionUpdate = (querySnapshot) => {
+  onCollectionUpdate = querySnapshot => {
     const boards = [];
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach(doc => {
       const { title, description, author } = doc.data();
       boards.push({
         key: doc.id,
         doc, // DocumentSnapshot
         title,
         description,
-        author,
+        author
       });
     });
     this.setState({
       boards
-   });
-  }
+    });
+  };
 
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
@@ -39,45 +38,45 @@ class Queries extends Component {
   render() {
     return (
       <div>
-      <Navbar />
-        
-      <div className="row">
-          <div className="col-md-12">
-            <div className="card">
-              <div className="card-header">
-                <h4> Lista de Consultas</h4>
-                <div class="card-header-action">
-                <h4><Link to="/create" class="btn btn-primary">Adicionar Consulta</Link></h4>
+        <Navbar />
+        <div className="col-md-12">
+          <div className="card">
+            <div className="card-header">
+              <h4> Lista de Consultas</h4>
+              <div class="card-header-action">
+                <h4>
+                  <Link to="/create" class="btn btn-primary">
+                    Adicionar Consulta
+                  </Link>
+                </h4>
               </div>
-              </div>
-              <div className="card-body">
-                <div className="table-responsive">
-                  <table className="table table-bordered table-md">
+            </div>
+            <div className="card-body">
+              <div className="table-responsive">
+                <table className="table table-bordered table-md">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Valor </th>
+                    <th>Ação</th>
+                  </tr>
+                  {this.state.boards.map(board => (
                     <tr>
-                      <th>Nome</th>
-                      <th>Descrição</th>
-                      <th>Valor </th>
-                      <th>Ação</th>
-                    </tr>
-                    {this.state.boards.map(board =>
-
-                    <tr>
-                    <td>{board.title}</td>
+                      <td>{board.title}</td>
                       <td>{board.description}</td>
                       <td>{board.author}</td>
-                      <td><Link to={`/show/${board.key}`}>Editar</Link></td>
+                      <td>
+                        <Link to={`/show/${board.key}`}>Editar</Link>
+                      </td>
                     </tr>
-                      )}
-                  </table>
-                </div>
+                  ))}
+                </table>
               </div>
-              
             </div>
           </div>
-          </div>
-  </div>
-  
-);
-}
+        </div>
+      </div>
+    );
+  }
 }
 export default Queries;
