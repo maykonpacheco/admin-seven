@@ -10,10 +10,26 @@ class Queries extends Component {
     this.ref = firebase.firestore().collection("boards");
     this.unsubscribe = null;
     this.state = {
-      boards: []
+      boards: [],
+      key: ''
     };
   }
 
+  componentDidMount() {
+    const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        this.setState({
+          board: doc.data(),
+          key: doc.id,
+          isLoading: false
+        });
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }
+  
   onCollectionUpdate = querySnapshot => {
     const boards = [];
     querySnapshot.forEach(doc => {
@@ -67,6 +83,7 @@ class Queries extends Component {
                       <td>{board.author}</td>
                       <td>
                         <Link to={`/show/${board.key}`}>Editar</Link>
+                        <td><Link to={`/agenda/${this.state.key}`} className="btn btn-secondary">Adicionar</Link></td>
                       </td>
                     </tr>
                   ))}

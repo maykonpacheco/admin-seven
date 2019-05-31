@@ -7,9 +7,65 @@ import ButtonData from "./ButtonData";
 
 class Agenda extends Component {
   
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      key: '',
+      disponibilidade: ''
+    };
+  }
+
+  componentDidMount() {
+    const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
+    ref.get().then((doc) => {
+      if (doc.exists) {
+        const board = doc.data();
+        this.setState({
+          key: doc.id,
+          title: board.title,
+          description: board.description,
+          author: board.author
+        });
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }
+
+  onChange = (e) => {
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState({board:state});
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { title, description, author } = this.state;
+
+    const updateRef = firebase.firestore().collection('boards').doc(this.state.key);
+    updateRef.set({
+      title,
+      description,
+      author
+    }).then((docRef) => {
+      this.setState({
+        key: '',
+        title: '',
+        description: '',
+        author: ''
+      });
+      this.props.history.push("/show/"+this.props.match.params.id)
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+  }
+
 
   render() {
-   
+    const { disponibilidade } = this.state;
     return (
       <div>
         <Navbar />
@@ -31,7 +87,7 @@ class Agenda extends Component {
                 </div>
               </div>
             </div>
-            <div class="card-body">
+            <div onSubmit={this.onSubmit} class="card-body">
               <div class="row">
                 <div class="col-sm-1.5">
                   <ul class="list-unstyled list-unstyled-noborder mb-0">
@@ -45,7 +101,10 @@ class Agenda extends Component {
                     <li class="media">
                       <div class="media-body ml-3">
                       <ButtonData
+                        value={disponibilidade}
+                        onClick={this.onChange}
                         text='Dia Todo'
+                        type="submit"
                         />
                       </div>
                     </li>
