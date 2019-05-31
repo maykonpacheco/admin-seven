@@ -7,7 +7,7 @@ class especialistShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Especialist: {},
+      board: {},
       key: ''
     };
   }
@@ -17,7 +17,7 @@ class especialistShow extends Component {
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          Especialist: doc.data(),
+          board: doc.data(),
           key: doc.id,
           isLoading: false
         });
@@ -30,7 +30,7 @@ class especialistShow extends Component {
   delete(id){
     firebase.firestore().collection('Especialist').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
-      this.props.history.push("/")
+      this.props.history.push("/Especialist")
     }).catch((error) => {
       console.error("Error removing document: ", error);
     });
@@ -41,19 +41,19 @@ class especialistShow extends Component {
       <div class="container">
         <div class="panel panel-default">
           <div class="panel-heading">
-          <h4><Link to="/Especialist">Lista de Especialista</Link></h4>
+          <h4><Link to="/Especialist">Lista de Consultas</Link></h4>
             <h3 class="panel-title">
-              {this.state.Especialist.name}
+              {this.state.board.title}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
-              <dt>CRM:</dt>
-              <dd>{this.state.Especialist.CRM}</dd>
-              <dt>author:</dt>
-              <dd>{this.state.Especialist.author}</dd>
+              <dt>Descrição:</dt>
+              <dd>{this.state.board.description}</dd>
+              <dt>Valor:</dt>
+              <dd>{this.state.board.author}</dd>
             </dl>
-            <Link to={`/especialistEdit/${this.state.key}`} class="btn btn-success">Editar</Link>&nbsp;
+            <Link to={`/edit/${this.state.key}`} class="btn btn-success">Editar</Link>&nbsp;
             <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Deletar</button>
           </div>
         </div>
