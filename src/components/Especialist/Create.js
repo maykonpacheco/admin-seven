@@ -12,7 +12,7 @@ class especialistCreate extends Component {
     this.state = {
       name: '',
       CRM: '',
-      author: ''
+      
     };
   }
   onChange = (e) => {
@@ -24,7 +24,7 @@ class especialistCreate extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { name, CRM, author } = this.state;
+    const { name, CRM } = this.state;
 
     this.ref.add({
       name,

@@ -15,6 +15,8 @@ import Agenda from './components/Agenda';
 
 import Agendamentos from './components/Agendamentos';
 
+import EditarAgenda from './components/Agenda/EditarAgenda';
+
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 
@@ -22,6 +24,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 const Routes = () => (
 <BrowserRouter>
       <Switch>
+        <Route exact path='/EditarAgenda/:id' component={EditarAgenda} />
         <Route exact path='/' component={Agendamentos} />
         <Route exact path='/Agenda' component={Agenda} />
         <Route exact path='/Queries' component={Queries} />
@@ -32,7 +35,6 @@ const Routes = () => (
         <Route exact path='/especialistCreate' component={especialistCreate} />
         <Route exact path='/especialistEdit' component={especialistEdit} />
         <Route exact path='/especialistShow' component={especialistShow} />
-
       </Switch>
   </BrowserRouter>
 );
