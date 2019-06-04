@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import firebase from '../../firebase';
 import { Link } from 'react-router-dom';
 
+
 class Show extends Component {
+
 
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ class Show extends Component {
       key: ''
     };
   }
+
 
   componentDidMount() {
     const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
@@ -27,6 +30,7 @@ class Show extends Component {
     });
   }
 
+
   delete(id){
     firebase.firestore().collection('boards').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
@@ -36,12 +40,13 @@ class Show extends Component {
     });
   }
 
+
   render() {
     return (
       <div class="container">
         <div class="panel panel-default">
           <div class="panel-heading">
-          <h4><Link to="/Queries">Lista de Consultas</Link></h4>
+          <h4><Link to="/Queries">Consultas</Link></h4>
             <h3 class="panel-title">
               {this.state.board.title}
             </h3>
@@ -61,5 +66,6 @@ class Show extends Component {
     );
   }
 }
+
 
 export default Show;

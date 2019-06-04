@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import firebase from '../../firebase';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';
-
+import SelecaoEspecialista from './SelecaoEspecialista';
 class especialistCreate extends Component {
 
   constructor() {
@@ -12,6 +12,7 @@ class especialistCreate extends Component {
     this.state = {
       name: '',
       CRM: '',
+      Especialidade: ''
       
     };
   }
@@ -24,18 +25,20 @@ class especialistCreate extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { name, CRM } = this.state;
+    const { name, CRM, Especialidade } = this.state;
 
     this.ref.add({
       name,
       CRM,
+      Especialidade
       
     }).then((docRef) => {
       this.setState({
         name: '',
         CRM: '',
+        Especialidade: ''
       });
-      this.props.history.push("/")
+      this.props.history.push("/Especialist")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -43,7 +46,7 @@ class especialistCreate extends Component {
   }
 
   render() {
-    const { name, CRM } = this.state;
+    const { name, CRM, Especialidade } = this.state;
     return (
       <div>
         <Navbar />
@@ -64,7 +67,11 @@ class especialistCreate extends Component {
               </div>
               <div class="form-group">
                 <label for="description">CRM:</label>
-                <input type="text" class="form-control" name="CRM" onChange={this.onChange} placeholder="CRM" />
+                <input type="text" class="form-control" name="CRM" value={CRM} onChange={this.onChange} placeholder="CRM" />
+              </div>
+              <div  class="form-group">
+              <label for="description">Especialidade:</label>
+                <input type="text" class="form-control" name="Especialidade" value={Especialidade} onChange={this.onChange} placeholder="Ex: Cardiologia, Psicologia, Dermatologia... " />
               </div>
               <button type="submit" class="btn btn-success">Adicionar</button>
             </form>

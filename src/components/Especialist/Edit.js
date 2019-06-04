@@ -42,7 +42,7 @@ class especialistEdit extends Component {
 
     const { name, CRM, author } = this.state;
 
-    const updateRef = firebase.firestore().collection('boardEspecialists').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('Especialists').doc(this.state.key);
     updateRef.set({
       name,
       CRM,

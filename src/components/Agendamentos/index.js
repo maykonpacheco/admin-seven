@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import Navbar from "../Navbar";
 import "../../assets/css/style.css";
 import "../../assets/css/components.css";
+import Navbar from '../Navbar';
 
 class Agendamentos extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-
-        
+       <Navbar />
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">

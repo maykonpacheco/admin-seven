@@ -7,7 +7,7 @@ class especialistShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: {},
+      Especialist: {},
       key: ''
     };
   }
@@ -41,19 +41,21 @@ class especialistShow extends Component {
       <div class="container">
         <div class="panel panel-default">
           <div class="panel-heading">
-          <h4><Link to="/Especialist">Lista de Consultas</Link></h4>
+          <h4><Link to="/Especialist">Especialista</Link></h4>
             <h3 class="panel-title">
-              {this.state.board.title}
+              {this.state.Especialist.title}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
               <dt>Descrição:</dt>
-              <dd>{this.state.board.description}</dd>
+              <dd>{this.state.Especialist.description}</dd>
               <dt>Valor:</dt>
-              <dd>{this.state.board.author}</dd>
+              <dd>{this.state.Especialist.author}</dd>
+              <dt>Escpelialidade:</dt>
+              <dd>{this.state.Especialist.Especialidade}</dd>
             </dl>
-            <Link to={`/edit/${this.state.key}`} class="btn btn-success">Editar</Link>&nbsp;
+            <Link to={`/especialistEdit/${this.state.key}`} class="btn btn-success">Editar</Link>&nbsp;
             <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Deletar</button>
           </div>
         </div>

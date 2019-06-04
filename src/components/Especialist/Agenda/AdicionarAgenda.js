@@ -1,86 +1,72 @@
 import React, { Component } from "react";
-import firebase from "../../firebase";
-import "../../assets/css/style.css";
-import "../../assets/css/components.css";
-import Navbar from "../Navbar";
+import firebase from "../../../firebase";
+import "../../../assets/css/style.css";
+import "../../../assets/css/components.css";
+import Navbar from "../../Navbar";
 import ButtonData from "./ButtonData";
 
-class EditarAgenda extends Component {
-  constructor(props) {
-    super(props);
+class AdicionarAgenda extends Component {
+  constructor() {
+    super();
+    this.ref = firebase.firestore().collection("Especialist");
     this.state = {
-      key: '',  
-      dom: {
-        diaTodo: '',
-        sete: '',
-        oito: '',
-        nove: '',
-        dez: '',
-        onze: '',
-        doze: '',
-        treze: '',
-        quatorze: '',
-        quinze: '',
-        dezesseis: '',
-        dezessete: '',
-        dezoito: '',
-        dezenove: '',
-        vinte: ''
+     disponibilidade: {
+        dom: {
+          diaTodo: false,
+          sete: false,
+          oito: false,
+          nove: false,
+          dez: false,
+          onze: false,
+          doze: false,
+          treze: false,
+          quatorze: false,
+          quinze: false,
+          dezesseis: false,
+          dezessete: false,
+          dezoito: false,
+          dezenove: false,
+          vinte: false
+        }
       }
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.setState(prevState => ({
-      dom: !prevState.dom
-    }));
-  }
+  
 
-  componentDidMount() {
-    const ref = firebase.firestore().collection('Agenda').doc(this.props.match.params.id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const Agenda = doc.data();
-        this.setState({
-          key: doc.id,
-          dom: Agenda.dom
-          
-        });
-      } else {
-        console.log("No such document!");
-      }
-    });
-  }
-
-
-  onChange = (e) => {
-    const state = this.state
+  onChange = e => {
+    const state = this.state;
     state[e.target.name] = e.target.value;
-    this.setState({Agenda:state});
-  }
+    this.setState(state);
+  };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
 
-    const { dom } = this.state;
+    const { disponibilidade } = this.state;
 
-    const updateRef = firebase.firestore().collection('Agenda').doc(this.state.key);
-    updateRef.set({
-        dom
-    }).then((docRef) => {
-      this.setState({
-        key: '',
-        dom: ''
+    const AdicionarAgendaRef = this.ref = firebase.firestore().collection("Especialist").doc(`/id`);
+    AdicionarAgendaRef
+      .add({
+        disponibilidade
+      })
+      .then(docRef => {
+        this.setState({
+          disponibilidade: ""
+        });
+        this.props.history.push("/Especialist");
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
       });
-      this.props.history.push("/EditarAgenda/:id"+this.props.match.params.id)
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-  }
+  };
 
   render() {
+    const { 
+      disponibilidade,
+      dom,
+      sete,
+      diaTodo  } = this.state;
 
     return (
       <div>
@@ -110,14 +96,15 @@ class EditarAgenda extends Component {
                     <ul class="list-unstyled list-unstyled-noborder mb-0">
                       <li class="media">
                         <div class="media-body ml-3">
-                          <ButtonData
+                          <button
                             name="dom"
                             class="btn btn-secondary bodyschedule"
-                            value={this.state.dom}
+                            value={dom}
                             onChange={this.onChange}
-                            text="DOMINGO"
-                            onClick={this.handleClick}
-                          />
+                            onClick={this.handleClick} 
+                          >
+                          DOMINGO
+                          </button>
                         </div>
                       
                       </li>
@@ -127,7 +114,7 @@ class EditarAgenda extends Component {
                             name="diatodo"
                             onClick={this.handleClick}
                             text="Dia todo"
-                            value={this.state.diaToda}
+                            value={diaTodo}
                             onChange={this.onChange}
                           />
                         </div>
@@ -138,6 +125,7 @@ class EditarAgenda extends Component {
                             name="sete"
                             type="checkbox"
                             text="07:00"
+                            value={sete}
                             onChange={this.onChange}
                           />
                         </div>
@@ -701,4 +689,4 @@ class EditarAgenda extends Component {
   }
 }
 
-export default EditarAgenda;
+export default AdicionarAgenda;

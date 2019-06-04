@@ -83,7 +83,6 @@ class Queries extends Component {
                       <td>{board.author}</td>
                       <td>
                         <Link to={`/show/${board.key}`}>Editar</Link>
-                        <td><Link to={`/agenda/${this.state.key}`} className="btn btn-secondary">Adicionar</Link></td>
                       </td>
                     </tr>
                   ))}

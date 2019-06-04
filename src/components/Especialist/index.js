@@ -19,12 +19,13 @@ class Especialist extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const Especialist = [];
     querySnapshot.forEach((doc) => {
-      const { name, CRM } = doc.data();
+      const { name, CRM, Especialidade } = doc.data();
       Especialist.push({
         key: doc.id,
         doc, // DocumentSnapshot
         name,
         CRM,
+        Especialidade
       });
     });
     this.setState({
@@ -56,6 +57,7 @@ class Especialist extends Component {
                           
                           <th>Nome</th>
                           <th>CRM</th>
+                          <th>Especialidade</th>
                           <th>Ação</th>
                           <th>Agenda</th>
                         </tr>
@@ -63,8 +65,9 @@ class Especialist extends Component {
                         <tr>
                           <td>{Especialist.name}</td>
                           <td>{Especialist.CRM}</td>
+                          <td>{Especialist.Especialidade}</td>
                           <td><Link to={`/especialistShow/${Especialist.key}`}>Editar</Link></td>
-                          <td><Link to={`/agenda/${Especialist.key}`} className="btn btn-secondary">Adicionar</Link></td>
+                          <td><Link to={`../AdicionarAgenda/${Especialist.key}`} className="btn btn-secondary">Configurar</Link></td>
                         </tr> 
                          )}
                       </table>
