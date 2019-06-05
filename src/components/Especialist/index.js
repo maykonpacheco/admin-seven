@@ -67,8 +67,8 @@ class Especialist extends Component {
                           <td>{Especialist.CRM}</td>
                           <td>{Especialist.Especialidade}</td>
                           <td><Link to={`/especialistShow/${Especialist.key}`}>Editar</Link></td>
-                          <td><Link to={`../AdicionarAgenda/${Especialist.key}`} className="btn btn-secondary">Configurar</Link></td>
-                        </tr> 
+                          <td><Link to={`../EditarAgenda/${Especialist.key}`} className="btn btn-secondary">Configurar</Link></td>
+                        </tr>  
                          )}
                       </table>
                     </div>

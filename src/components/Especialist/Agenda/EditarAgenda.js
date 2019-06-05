@@ -57,7 +57,7 @@ class EditarAgenda extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({Agenda:state});
+    this.setState({Especialist:state});
   }
 
   onSubmit = (e) => {
@@ -65,7 +65,7 @@ class EditarAgenda extends Component {
 
     const { dom } = this.state;
 
-    const updateRef = firebase.firestore().collection('Agenda').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('Especialist').doc(this.state.key);
     updateRef.set({
         dom
     }).then((docRef) => {
@@ -110,14 +110,15 @@ class EditarAgenda extends Component {
                     <ul class="list-unstyled list-unstyled-noborder mb-0">
                       <li class="media">
                         <div class="media-body ml-3">
-                          <ButtonData
+                          <button
                             name="dom"
                             class="btn btn-secondary bodyschedule"
                             value={this.state.dom}
                             onChange={this.onChange}
-                            text="DOMINGO"
                             onClick={this.handleClick}
-                          />
+                          >
+                          DOMINGO
+                          </button>
                         </div>
                       
                       </li>
