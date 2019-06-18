@@ -7,7 +7,7 @@ import Create from './components/Queries/Create';
 import Show from './components/Queries/Show'; 
 
 import Especialist from './components/Especialist';
-import especialistCreate from './components/Especialist/Create';
+import CreateEspecialist from './components/Especialist/Create';
 import especialistEdit from './components/Especialist/Edit';
 import especialistShow from './components/Especialist/Show';
 
@@ -32,7 +32,7 @@ const Routes = () => (
         <Route exact path='/create' component={Create} />
         <Route exact path='/show/:id' component={Show} />
         <Route exact path='/Especialist' component={Especialist} />
-        <Route exact path='/especialistCreate' component={especialistCreate} />
+        <Route exact path='/CreateEspecialist' component={CreateEspecialist} />
         <Route exact path='/especialistEdit/:id' component={especialistEdit} />
         <Route exact path='/especialistShow/:id' component={especialistShow} />
       </Switch>

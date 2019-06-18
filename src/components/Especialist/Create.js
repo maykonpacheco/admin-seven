@@ -1,88 +1,101 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import firebase from '../../firebase';
-import { Link } from 'react-router-dom';
-import Navbar from '../Navbar';
-import SelecaoEspecialista from './SelecaoEspecialista';
-import AdicionarAgenda from '../Especialist/Agenda//AdicionarAgenda';
-class especialistCreate extends Component {
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import firebase from "../../firebase";
+import { Link } from "react-router-dom";
+//import Navbar from "../Navbar";
+import SelecaoEspecialista from "./SelecaoEspecialista";
+import AdicionarAgenda from "../Especialist/Agenda//AdicionarAgenda";
+import ButtonData from "../Especialist/Agenda/ButtonData";
 
-  constructor() {
-    super();
-    this.ref = firebase.firestore().collection('Especialist');
-    this.state = {
-      name: '',
-      CRM: '',
-      Especialidade: ''
-      
-    };
-  }
-  onChange = (e) => {
-    const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-  }
 
-  onSubmit = (e) => {
-    e.preventDefault();
 
-    const { name, CRM, Especialidade } = this.state;
+const MeuBotao = ({ index, hour, value, handleClick }) => (
+  <button
+    onClick={() => handleClick(index)}
+    style={{
+      background: value ? "lime" : "red"
+    }}
+  >
+    {hour}
+  </button>
+);
 
-    this.ref.add({
-      name,
-      CRM,
-      Especialidade
-      
-    }).then((docRef) => {
-      this.setState({
-        name: '',
-        CRM: '',
-        Especialidade: ''
-      });
-      this.props.history.push("/Especialist")
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-  }
 
-  render() {
-    const { name, CRM, Especialidade } = this.state;
-    return (
-      <div>
-        <Navbar />
-      
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Adicionar Especialista
-            </h3>
-          </div>
-          <div class="panel-body">
-            <h4><Link to="/Especialist" class="btn btn-primary">Voltar</Link></h4>
-            <form onSubmit={this.onSubmit}>
-              <div class="form-group">
-                <label for="title">Nome:</label>
-                <input type="text" class="form-control" name="name" value={name} onChange={this.onChange} placeholder="nome" />
-              </div>
-              <div class="form-group">
-                <label for="description">CRM:</label>
-                <input type="text" class="form-control" name="CRM" value={CRM} onChange={this.onChange} placeholder="CRM" />
-              </div>
-              <div  class="form-group">
-              <label for="description">Especialidade:</label>
-                <input type="text" class="form-control" name="Especialidade" value={Especialidade} onChange={this.onChange} placeholder="Ex: Cardiologia, Psicologia, Dermatologia... " />
-              </div>
-              <AdicionarAgenda />
-              <button type="submit" class="btn btn-success">Adicionar</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      </div>
+function CreateEspecialist () {
+  const [buttons, setButtons] = useState([
+      { disponibilidade: [
+        {
+          day:'Domingo', 
+          hours: [
+            {hour: '07:00', value: false},
+            {hour: '08:00', value: false},
+            {hour: '09:00', value: false},
+            {hour: '10:00', value: false},
+            {hour: '11:00', value: false},
+            {hour: '12:00', value: false},
+            {hour: '13:00', value: false},
+            {hour: '14:00', value: false},
+            {hour: '15:00', value: false},
+            {hour: '16:00', value: false},
+            {hour: '17:00', value: false},
+            {hour: '18:00', value: false},
+          ]
+        }
+      ]
+    }
+  ]);
+
+  
+  function handleOnClick(index) {
+    setButtons(
+      buttons.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
+
+  
+    return (
+      <div className='CreateEspecialist' >
+              
+            {buttons.map((btn, i,) => (
+               
+      
+            <div class="card-body">
+            <div class="row">  
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        {btn.day}
+                      </button>
+                    </div>
+                  </li>
+              
+                  
+                  <li className="media">
+                    <div class="media-body ml-1.5">
+                      <MeuBotao
+                       index={i}
+                       value={btn.value}
+                       hour={btn.hour}
+                       handleClick={handleOnClick}
+                      >
+                      {btn.hour}
+                      </MeuBotao>
+
+                    </div>
+                  </li>
+           
+                </ul>
+              </div>
+              </div>
+              </div>
+                
+                ))}
+            </div>
+    );
+
 }
 
-export default especialistCreate;
+
+export default CreateEspecialist;

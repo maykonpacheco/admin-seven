@@ -43,7 +43,7 @@ class especialistShow extends Component {
           <div class="panel-heading">
           <h4><Link to="/Especialist">Especialista</Link></h4>
             <h3 class="panel-title">
-              {this.state.Especialist.title}
+              {this.state.Especialist.name}
             </h3>
           </div>
           <div class="panel-body">
@@ -51,7 +51,7 @@ class especialistShow extends Component {
               <dt>Descrição:</dt>
               <dd>{this.state.Especialist.description}</dd>
               <dt>Valor:</dt>
-              <dd>{this.state.Especialist.author}</dd>
+              <dd>{this.state.Especialist.crm}</dd>
               <dt>Escpelialidade:</dt>
               <dd>{this.state.Especialist.Especialidade}</dd>
             </dl>
