@@ -8,9 +8,10 @@ class especialistEdit extends Component {
     super(props);
     this.state = {
       key: '',
-      name: '',
-      CRM: '',
-      author: ''
+      nome: '',
+      crm: '',
+      especialidade: '',
+      domingo: ''
     };
   }
 
@@ -21,9 +22,9 @@ class especialistEdit extends Component {
         const Especialist = doc.data();
         this.setState({
           key: doc.id,
-          Name: Especialist.name,
-          CRM: Especialist.CRM,
-          author: Especialist.author
+          nome: Especialist.nome,
+          crm: Especialist.crm,
+          especialidade: Especialist.especialidade
         });
       } else {
         console.log("No such document!");
@@ -40,19 +41,19 @@ class especialistEdit extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { name, CRM, author } = this.state;
+    const { nome, crm, especialidade } = this.state;
 
     const updateRef = firebase.firestore().collection('Especialists').doc(this.state.key);
     updateRef.set({
-      name,
-      CRM,
-      author
+      nome,
+      crm,
+      especialidade
     }).then((docRef) => {
       this.setState({
         key: '',
-        name: '',
-        CRM: '',
-        author: ''
+        nome: '',
+        crm: '',
+        especialidade: ''
       });
       this.props.history.push("/show/"+this.props.match.params.id)
     })
@@ -74,16 +75,16 @@ class especialistEdit extends Component {
             <h4><Link to={`/show/${this.state.key}`} class="btn btn-primary">Voltar</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
-                <label for="title">Nome:</label>
-                <input type="text" class="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="nome" />
+                <label for="Nome">Nome:</label>
+                <input type="text" class="form-control" name="nome" value={this.state.nome} onChange={this.onChange} />
               </div>
               <div class="form-group">
-                <label for="description">CRM:</label>
-                <input type="text" class="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="descrição" />
+                <label for="CRM">CRM:</label>
+                <input type="text" class="form-control" name="crm" value={this.state.crm} onChange={this.onChange}  />
               </div>
               <div class="form-group">
-                <label for="author">Valor:</label>
-                <input type="text" class="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder="valor" />
+                <label for="Especialidade">Especialidade:</label>
+                <input type="text" class="form-control" name="especialidade" value={this.state.especialidade} onChange={this.onChange} />
               </div>
               <button type="submit" class="btn btn-success">Salvar</button>
             </form>

@@ -30,5 +30,11 @@
       transform: rotate(360deg);
     }
   }
+
+  .bodyhour {
+    display: flex;
+    align-items: center;
+    justify-content: center }
+ 
   
   

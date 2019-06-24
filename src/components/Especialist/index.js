@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import "../../assets/css/style.css";
 import "../../assets/css/components.css";
 import firebase from '../../firebase';
 import Navbar from '../Navbar';
+import { Link, withRouter } from 'react-router-dom';
 
 
 class Especialist extends Component {
@@ -19,13 +19,13 @@ class Especialist extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const Especialist = [];
     querySnapshot.forEach((doc) => {
-      const { name, CRM, Especialidade } = doc.data();
+      const { nome, crm, especialidade } = doc.data();
       Especialist.push({
         key: doc.id,
         doc, // DocumentSnapshot
-        name,
-        CRM,
-        Especialidade
+        nome,
+        crm,
+        especialidade
       });
     });
     this.setState({
@@ -47,7 +47,7 @@ class Especialist extends Component {
                   <div className="card-header">
                     <h4> Lista de Especialistas</h4>
                     <div class="card-header-action">
-                    <h4><Link to="/especialistCreate" className="btn btn-primary">Adicionar Especialista</Link></h4>
+                    <h4><Link to="/CreateEspecialist" className="btn btn-primary">Adicionar Especialista</Link></h4>
                   </div>
                   </div>
                   <div className="card-body">
@@ -63,9 +63,9 @@ class Especialist extends Component {
                         </tr>
                         {this.state.Especialist.map(Especialist =>
                         <tr>
-                          <td>{Especialist.name}</td>
-                          <td>{Especialist.CRM}</td>
-                          <td>{Especialist.Especialidade}</td>
+                          <td>{Especialist.nome}</td>
+                          <td>{Especialist.crm}</td>
+                          <td>{Especialist.especialidade}</td>
                           <td><Link to={`/especialistShow/${Especialist.key}`}>Editar</Link></td>
                           <td><Link to={`../EditarAgenda/${Especialist.key}`} className="btn btn-secondary">Configurar</Link></td>
                         </tr>  
@@ -76,9 +76,14 @@ class Especialist extends Component {
                   
                 </div>
               </div>
+              <div className="simple-footer">
+                <p>Feito com <i className="fa fa-heart"></i> em Cuiabá-MT</p>
+               </div>
+
               </div> 
+              
     );
   }
 }
 
-export default Especialist;
+export default  withRouter((Especialist));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import Queries from './components/Queries';
@@ -11,22 +11,26 @@ import CreateEspecialist from './components/Especialist/Create';
 import especialistEdit from './components/Especialist/Edit';
 import especialistShow from './components/Especialist/Show';
 
-import AdicionarAgenda from './components/Especialist/Agenda/AdicionarAgenda';
 
 import Agendamentos from './components/Agendamentos';
 
-import EditarAgenda from './components/Especialist/Agenda/EditarAgenda';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import firebase from './firebase';
+
+import SignIn from './components/Login';
+
+export default function Routes () {
+  
+ 
+return  (
 
 
-const Routes = () => (
 <BrowserRouter>
       <Switch>
-        <Route exact path='/EditarAgenda/:id' component={EditarAgenda} />
+      <Route exact path="/login" component={SignIn} />
         <Route exact path='/' component={Agendamentos} />
-        <Route exact path='/AdicionarAgenda/:id' component={AdicionarAgenda} />
         <Route exact path='/Queries' component={Queries} />
         <Route exact path='/edit/:id' component={Edit} />
         <Route exact path='/create' component={Create} />
@@ -37,6 +41,7 @@ const Routes = () => (
         <Route exact path='/especialistShow/:id' component={especialistShow} />
       </Switch>
   </BrowserRouter>
-);
 
-export default Routes;
+  );
+
+}

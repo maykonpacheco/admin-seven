@@ -1,7 +1,9 @@
-
 import * as firebase from 'firebase';
+import 'firebase/auth'
 
 const settings = {timestampsInSnapshots: true};
+
+
 
 const config = {
   apiKey: "AIzaSyBOL9UhLuV8g5-yF5TrX-Dfiw_OEWmg9k4",
@@ -11,8 +13,10 @@ const config = {
   storageBucket: "febsaude-4aa5b.appspot.com",
   messagingSenderId: "224035018178"
 };
-firebase.initializeApp(config);
 
-firebase.firestore().settings(settings);
+      firebase.initializeApp(config)
+      firebase.auth();
+      firebase.firestore().settings(settings);
+
 
 export default firebase;
