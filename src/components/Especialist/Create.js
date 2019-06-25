@@ -155,11 +155,12 @@ function CreateEspecialist(props) {
   const handleCrmChange = e => setCrm(e.target.value);
   const handleEspecialidadeChange = e => setEspecialidade(e.target.value);
 
-  
-  const onSubmit = e => {
-    e.preventDefault()
-    
-    Especialista.add({
+
+
+    function onSubmit (e) {
+     e.preventDefault();
+
+      Especialista.add({
       nome,
       crm,
       especialidade,
@@ -182,14 +183,13 @@ function CreateEspecialist(props) {
         quinta: '',
         sexta: '',
         sabado: ''
-      });
-      props.history.push("/Especialist")
+      });     
+      props.history.replace('/Especialist')
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-    
-};
+  };
 
 
 
@@ -467,9 +467,14 @@ function CreateEspecialist(props) {
                 </div>
                 <div />
 
-                <button type="submit" class="btn btn-success">
+                <button 
+                type="submit" 
+                onClick={onSubmit} 
+                class="btn btn-success"
+                >
                   Adicionar
                 </button>
+
               </form>
             </div>
           </div>
@@ -482,6 +487,7 @@ function CreateEspecialist(props) {
     </div>     
              
   );
+  
 }
 
 export default CreateEspecialist;

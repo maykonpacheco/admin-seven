@@ -18,8 +18,6 @@ const MeuBotao = ({ index, hour, value, handleClick }) => (
 );
 
 
-
-
 // Criação de Especialista - Estados 
 function EditarHorarios(props) {
      const [key, setKey] = useState("");  
@@ -149,13 +147,19 @@ function EditarHorarios(props) {
 
 
   useEffect(() => {
-    const ref = firebase.firestore().collection('Especialist').this.props.match.params.id;
+    const ref = firebase.firestore().collection('Especialist').doc(props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
         const Especialist = doc.data();
         setNome({
-            nome: Especialist.nome,
+          nome: Especialist.nome   
         });
+        setCrm({
+          crm: Especialist.crm
+      });
+        setEspecialidade({
+          especialidade: Especialist.especialidade
+    });
         this.setState({
           key: doc.id,
           nome: Especialist.nome,
@@ -203,7 +207,7 @@ function EditarHorarios(props) {
         sexta: '',
         sabado: ''
       });
-      this.props.history.push("/Especialist")
+      props.history.replace("/Especialist")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
