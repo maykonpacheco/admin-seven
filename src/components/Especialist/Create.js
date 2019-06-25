@@ -22,7 +22,7 @@ const MeuBotao = ({ index, hour, value, handleClick }) => (
 
 
 // Criação de Especialista - Estados 
-function CreateEspecialist() {
+function CreateEspecialist(props) {
   const [nome, setNome] = useState("");
   const [crm, setCrm] = useState("");
   const [especialidade, setEspecialidade] = useState("");
@@ -183,7 +183,7 @@ function CreateEspecialist() {
         sexta: '',
         sabado: ''
       });
-      this.props.history.push("/Especialist")
+      props.history.push("/Especialist")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);

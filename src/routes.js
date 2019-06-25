@@ -11,6 +11,7 @@ import CreateEspecialist from './components/Especialist/Create';
 import especialistEdit from './components/Especialist/Edit';
 import especialistShow from './components/Especialist/Show';
 
+import EditarHorarios from './components/Especialist/EditarHorarios';
 
 import Agendamentos from './components/Agendamentos';
 
@@ -31,6 +32,7 @@ return  (
       <Switch>
       <Route exact path="/login" component={SignIn} />
         <Route exact path='/' component={Agendamentos} />
+        <Route exact path='/editarhorarios/:id' component={EditarHorarios} />
         <Route exact path='/Queries' component={Queries} />
         <Route exact path='/edit/:id' component={Edit} />
         <Route exact path='/create' component={Create} />
