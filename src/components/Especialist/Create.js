@@ -157,7 +157,7 @@ function CreateEspecialist(props) {
 
 
 
-    function onSubmit (e) {
+    function onSubmit(e) {
      e.preventDefault();
 
       Especialista.add({
@@ -184,11 +184,11 @@ function CreateEspecialist(props) {
         sexta: '',
         sabado: ''
       });     
-      props.history.replace('/Especialist')
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
+    props.history.push('/Especialist')   
   };
 
 
@@ -469,7 +469,7 @@ function CreateEspecialist(props) {
 
                 <button 
                 type="submit" 
-                onClick={onSubmit} 
+              
                 class="btn btn-success"
                 >
                   Adicionar
@@ -487,7 +487,7 @@ function CreateEspecialist(props) {
     </div>     
              
   );
-  
+
 }
 
 export default CreateEspecialist;

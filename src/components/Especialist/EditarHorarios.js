@@ -3,186 +3,175 @@ import firebase from "../../firebase";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 //import SelecaoEspecialista from "./SelecaoEspecialista";
-import './styles.css';
+import "./styles.css";
 
-
-//Componente Botão 
+//Componente Botão
 const MeuBotao = ({ index, hour, value, handleClick }) => (
   <button
-    className={ value ? "btn btn-success bodyschedule" : "btn btn-outline-primary bodyschedule" }
+    className={
+      value
+        ? "btn btn-success bodyschedule"
+        : "btn btn-outline-primary bodyschedule"
+    }
     onClick={() => handleClick(index)}
-    
   >
     {hour}
   </button>
 );
 
+// Criação de Especialista - Estados
+function EditarHorarios(id) {
+  const [key, setKey] = useState("");
+  const [nome, setNome] = useState("");
+  const [crm, setCrm] = useState("");
+  const [especialidade, setEspecialidade] = useState("");
+  const [domingo, setDomingo] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  const [segunda, setSegunda] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  const [terca, setTerca] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  const [quarta, setQuarta] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  const [quinta, setQuinta] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  const [sexta, setSexta] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  const [sabado, setSabado] = useState([
+    { hour: "07:00", value: false },
+    { hour: "08:00", value: false },
+    { hour: "09:00", value: false },
+    { hour: "10:00", value: false },
+    { hour: "11:00", value: false },
+    { hour: "12:00", value: false },
+    { hour: "13:00", value: false },
+    { hour: "14:00", value: false },
+    { hour: "15:00", value: false },
+    { hour: "16:00", value: false },
+    { hour: "17:00", value: false },
+    { hour: "18:00", value: false },
+    { hour: "19:00", value: false },
+    { hour: "20:00", value: false }
+  ]);
+  
 
-// Criação de Especialista - Estados 
-function EditarHorarios(props) {
-     const [key, setKey] = useState("");  
-     const [nome, setNome] = useState("");
-     const [crm, setCrm] = useState("");
-     const [especialidade, setEspecialidade] = useState("");
-     const [domingo, setDomingo] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-     const [segunda, setSegunda] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-     const [terca, setTerca] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-     const [quarta, setQuarta] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-     const [quinta, setQuinta] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-     const [sexta, setSexta] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-     const [sabado, setSabado] = useState([
-    { hour: "07:00", value: false },
-    { hour: "08:00", value: false },
-    { hour: "09:00", value: false },
-    { hour: "10:00", value: false },
-    { hour: "11:00", value: false },
-    { hour: "12:00", value: false },
-    { hour: "13:00", value: false },
-    { hour: "14:00", value: false },
-    { hour: "15:00", value: false },
-    { hour: "16:00", value: false },
-    { hour: "17:00", value: false },
-    { hour: "18:00", value: false },
-    { hour: "19:00", value: false },
-    { hour: "20:00", value: false }
-  
-  ]);
-
-
-
-  useEffect(() => {
-    const ref = firebase.firestore().collection('Especialist').doc(props.match.params.id);
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        const Especialist = doc.data();
-        setNome({
-          nome: Especialist.nome   
+  useEffect(
+    () => {
+     firebase.firestore().collection('Especialist')
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          const especialista = doc.data();
+          setNome({
+            key: doc.id,
+            nome:  doc.data().nome
+          })
+            console.log(doc.id, " => ", doc.data());
         });
-        setCrm({
-          crm: Especialist.crm
-      });
-        setEspecialidade({
-          especialidade: Especialist.especialidade
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+
     });
-        this.setState({
-          key: doc.id,
-          nome: Especialist.nome,
-          crm: Especialist.crm,
-          especialidade: Especialist.especialidade
-        });
-      } else {
-        console.log("No such document!");
-      }
-    });
-  });
+  }, [id]);
   
-  
+
   // Funções para subir para o Firebase
   const handleNomeChange = e => setNome(e.target.value);
   const handleCrmChange = e => setCrm(e.target.value);
   const handleEspecialidadeChange = e => setEspecialidade(e.target.value);
 
-  
   const onSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const Especialista = firebase.firestore().collection('Especialists').doc(key);
+    const Especialista = firebase
+      .firestore()
+      .collection("Especialists")
+      .doc(key);
     Especialista.set({
       nome,
       crm,
@@ -193,29 +182,26 @@ function EditarHorarios(props) {
       quarta,
       quinta,
       sexta,
-      sabado     
-    }).then((docRef) => {
-      Especialista({
-        nome: '',
-        crm: '',
-        especialidade: '',
-        domingo: '',
-        segunda: '',
-        terca: '',
-        quarta: '',
-        quinta: '',
-        sexta: '',
-        sabado: ''
-      });
-      props.history.replace("/Especialist")
+      sabado
     })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-    
-};
-
-
+      .then(docRef => {
+        Especialista({
+          nome: "",
+          crm: "",
+          especialidade: "",
+          domingo: "",
+          segunda: "",
+          terca: "",
+          quarta: "",
+          quinta: "",
+          sexta: "",
+          sabado: ""
+        });
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
+  };
 
   function domingoHandleOnClick(index) {
     setDomingo(
@@ -257,203 +243,202 @@ function EditarHorarios(props) {
     <div className="CreateEspecialist">
       <Navbar />
       <div class="panel-heading bodyhour">
-              <h3 class="panel-title">Editar Especialista</h3>
+        <h3 class="panel-title">Editar Especialista</h3>
       </div>
-     <div className='bodyhour'>
-      <div className="col-md-14">
-        <div className="card-body">
-          <div className="row">
-            <div className="col-sm-1.5">
-              <ul className="list-unstyled list-unstyled-noborder mb-0">
-                <li className="media">
-                  <div className="media-body ml-1.5">
-                    <button className="btn btn-secondary bodyschedule">
-                      DOMINGO
-                    </button>
-                  </div>
-                </li>
-                
-              {domingo.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={domingoHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
-            </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
-                      SEGUNDA
-                    </button>
-                  </div>
-                </li>
-                
-              {segunda.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={segundaHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
-            </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
-                      TERÇA
-                    </button>
-                  </div>
-                </li>
-                
-              {terca.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={tercaHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
-            </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
-                      QUARTA
-                    </button>
-                  </div>
-                </li>
-                
-              {quarta.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={quartaHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
-            </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
-                      QUINTA
-                    </button>
-                  </div>
-                </li>
-                
-              {quinta.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={quintaHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
-            </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
-                      SEXTA
-                    </button>
-                  </div>
-                </li>
-                
-              {sexta.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={sextaHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
-            </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
-                      SABADO
-                    </button>
-                  </div>
-                </li>
-                
-              {sabado.map((btn, i) => (
-                <li className="media">
-                  <div class="media-body ml-1.5">
-                    <MeuBotao
-                      index={i}
-                      value={btn.value}
-                      hour={btn.hour}
-                      handleClick={sabadoHandleOnClick}
-                    >
-                      {btn.hour}
-                    </MeuBotao>
-                  </div>
-                </li>
-                      ))}
-              </ul>
+      <div className="bodyhour">
+        <div className="col-md-14">
+          <div className="card-body">
+            <div className="row">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
+                        DOMINGO
+                      </button>
+                    </div>
+                  </li>
+
+                  {domingo.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={domingoHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        SEGUNDA
+                      </button>
+                    </div>
+                  </li>
+
+                  {segunda.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={segundaHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        TERÇA
+                      </button>
+                    </div>
+                  </li>
+
+                  {terca.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={tercaHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        QUARTA
+                      </button>
+                    </div>
+                  </li>
+
+                  {quarta.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={quartaHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        QUINTA
+                      </button>
+                    </div>
+                  </li>
+
+                  {quinta.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={quintaHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        SEXTA
+                      </button>
+                    </div>
+                  </li>
+
+                  {sexta.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={sextaHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="col-sm-1.5">
+                <ul class="list-unstyled list-unstyled-noborder mb-0">
+                  <li class="media">
+                    <div class="media-body ml-1.5">
+                      <button class="btn btn-secondary bodyschedule">
+                        SABADO
+                      </button>
+                    </div>
+                  </li>
+
+                  {sabado.map((btn, i) => (
+                    <li className="media">
+                      <div class="media-body ml-1.5">
+                        <MeuBotao
+                          index={i}
+                          value={btn.value}
+                          hour={btn.hour}
+                          handleClick={sabadoHandleOnClick}
+                        >
+                          {btn.hour}
+                        </MeuBotao>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-        </div>
-    </div>
-    
-    <div onSubmit={onSubmit}>
+      </div>
+
+      <div onSubmit={onSubmit}>
         <div class="container">
           <div class="panel panel-default">
-            
             <div class="panel-body">
               <form>
                 <div class="form-group">
@@ -485,7 +470,7 @@ function EditarHorarios(props) {
                     class="form-control"
                     name="Especialidade"
                     value={especialidade}
-                    onChange={handleEspecialidadeChange}                   
+                    onChange={handleEspecialidadeChange}
                     placeholder="Ex: Cardiologia, Psicologia, Dermatologia... "
                   />
                 </div>
@@ -500,11 +485,11 @@ function EditarHorarios(props) {
         </div>
       </div>
       <div className="simple-footer">
-            <p>Feito com <i className="fa fa-heart"></i> em Cuiabá-MT</p>
+        <p>
+          Feito com <i className="fa fa-heart" /> em Cuiabá-MT
+        </p>
       </div>
-
-    </div>     
-             
+    </div>
   );
 }
 
