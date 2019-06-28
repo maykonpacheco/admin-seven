@@ -20,7 +20,7 @@ const MeuBotao = ({ index, hour, value, handleClick }) => (
 );
 
 // Criação de Especialista - Estados
-function EditarHorarios(id) {
+function EditarHorarios(props) {
   const [key, setKey] = useState("");
   const [nome, setNome] = useState("");
   const [crm, setCrm] = useState("");
@@ -138,70 +138,69 @@ function EditarHorarios(id) {
     { hour: "20:00", value: false }
   ]);
   
-
   useEffect(
     () => {
-     firebase.firestore().collection('Especialist')
-    .get()
-    .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+
+      const ref = firebase.firestore().collection('Especialist').doc(props.match.params.id);
+      ref.get().then((doc) => {
+        if (doc.exists) {
           const especialista = doc.data();
           setNome({
-            key: doc.id,
-            nome:  doc.data().nome
-          })
-            console.log(doc.id, " => ", doc.data());
+            nome: especialista.nome
+         });
+         setCrm({
+           crm: especialista.crm
         });
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
+        setEspecialidade({
+         especialidade: especialista.especialidade
+      });
+          console.log(doc.id, " => ", doc.data());
+        } else {
+          console.log("No such document!");
+        }
+      });
+  }, [props]);
 
-    });
-  }, [id]);
-  
+
 
   // Funções para subir para o Firebase
   const handleNomeChange = e => setNome(e.target.value);
   const handleCrmChange = e => setCrm(e.target.value);
   const handleEspecialidadeChange = e => setEspecialidade(e.target.value);
+ 
+ 
 
-  const onSubmit = e => {
+
+  function onSubmit (e) {
     e.preventDefault();
+    console.log("testando envio ->")
 
-    const Especialista = firebase
-      .firestore()
-      .collection("Especialists")
-      .doc(key);
-    Especialista.set({
+     
+  const updateRef = firebase.firestore().collection('Especialist').doc(key);
+    
+    updateRef.set({
       nome,
       crm,
-      especialidade,
-      domingo,
-      segunda,
-      terca,
-      quarta,
-      quinta,
-      sexta,
-      sabado
+      especialidade
+    }).then((docRef) => {
+      setNome({
+        nome: ''
+     });
+     setCrm({
+       crm:''
+    });
+    setEspecialidade({
+     especialidade: ''
+  });
+  setKey({
+    Key: ''
+ });
+      this.props.history.push("/show/"+this.props.match.params.id)
     })
-      .then(docRef => {
-        Especialista({
-          nome: "",
-          crm: "",
-          especialidade: "",
-          domingo: "",
-          segunda: "",
-          terca: "",
-          quarta: "",
-          quinta: "",
-          sexta: "",
-          sabado: ""
-        });
-      })
-      .catch(error => {
-        console.error("Error adding document: ", error);
-      });
-  };
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+  }
 
   function domingoHandleOnClick(index) {
     setDomingo(
@@ -238,7 +237,6 @@ function EditarHorarios(id) {
       sabado.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
-
   return (
     <div className="CreateEspecialist">
       <Navbar />
@@ -447,7 +445,7 @@ function EditarHorarios(id) {
                     type="text"
                     class="form-control"
                     name="name"
-                    value={nome}
+                    value={nome.nome}
                     onChange={handleNomeChange}
                     placeholder="nome"
                   />
@@ -458,7 +456,7 @@ function EditarHorarios(id) {
                     type="text"
                     class="form-control"
                     name="CRM"
-                    value={crm}
+                    value={crm.crm}
                     onChange={handleCrmChange}
                     placeholder="CRM"
                   />
@@ -469,7 +467,7 @@ function EditarHorarios(id) {
                     type="text"
                     class="form-control"
                     name="Especialidade"
-                    value={especialidade}
+                    value={especialidade.especialidade}
                     onChange={handleEspecialidadeChange}
                     placeholder="Ex: Cardiologia, Psicologia, Dermatologia... "
                   />
