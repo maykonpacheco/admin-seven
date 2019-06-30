@@ -36,6 +36,7 @@ function Especialist(props) {
   
 return (
   <div>
+    
   <Navbar />
     
       <div className="col-md-12">
@@ -49,8 +50,7 @@ return (
           <div className="card-body">
             <div className="table-responsive">
               <table className="table table-bordered table-md">
-                <tr >
-                  
+                <tr >   
                   <th>Nome</th>
                   <th>CRM</th>
                   <th>Especialidade</th>
@@ -165,4 +165,4 @@ class Especialist extends Component {
 }
 
 export default  withRouter((Especialist));
-*/
+*/ 
