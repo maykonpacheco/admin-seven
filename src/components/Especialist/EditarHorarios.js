@@ -40,6 +40,7 @@ function EditarHorarios(props) {
     { hour: "18:00", value: false },
     { hour: "19:00", value: false },
     { hour: "20:00", value: false }
+  
   ]);
   const [segunda, setSegunda] = useState([
     { hour: "07:00", value: false },
@@ -154,7 +155,10 @@ function EditarHorarios(props) {
         setEspecialidade({
          especialidade: especialista.especialidade
       });
-          console.log(doc.id, " => ", doc.data());
+      setDomingo({
+        domingo: especialista.domingo
+     });
+          console.log(doc.id, " => ", doc.data(), "testando esse agora", domingo);
         } else {
           console.log("No such document!");
         }
@@ -173,11 +177,10 @@ function EditarHorarios(props) {
 
   function onSubmit (e) {
     e.preventDefault();
-    console.log("testando envio ->")
+    console.log("testando envio ->", nome )
 
-     
-  const updateRef = firebase.firestore().collection('Especialist').doc(key);
-    
+    const updateRef = firebase.firestore().collection('Especialist').doc(props.match.params.id);
+
     updateRef.set({
       nome,
       crm,
@@ -192,14 +195,12 @@ function EditarHorarios(props) {
     setEspecialidade({
      especialidade: ''
   });
-  setKey({
-    Key: ''
- });
-      this.props.history.push("/show/"+this.props.match.params.id)
+      
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
+    props.history.push('/Especialist')
   }
 
   function domingoHandleOnClick(index) {
