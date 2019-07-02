@@ -157,13 +157,15 @@ function EditarHorarios(props) {
       });
       setDomingo({
         domingo: especialista.domingo
-     });
-          console.log(doc.id, " => ", doc.data(), "testando esse agora", domingo);
+      });
+          console.log(doc.id, " => ", doc.data());
         } else {
           console.log("No such document!");
         }
       });
   }, [props]);
+
+  
 
 
 
@@ -177,8 +179,7 @@ function EditarHorarios(props) {
 
   function onSubmit (e) {
     e.preventDefault();
-    console.log("testando envio ->", nome )
-
+    
     const updateRef = firebase.firestore().collection('Especialist').doc(props.match.params.id);
 
     updateRef.set({
@@ -195,7 +196,10 @@ function EditarHorarios(props) {
     setEspecialidade({
      especialidade: ''
   });
-      
+  setDomingo({
+    domingo: ''
+  });  
+  
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -205,7 +209,7 @@ function EditarHorarios(props) {
 
   function domingoHandleOnClick(index) {
     setDomingo(
-      domingo.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+      Object.values(domingo).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function segundaHandleOnClick(index) {
@@ -258,7 +262,8 @@ function EditarHorarios(props) {
                     </div>
                   </li>
 
-                  {domingo.map((btn, i) => (
+                  {Object.values(domingo).map((btn, i) => (
+                    
                     <li className="media">
                       <div class="media-body ml-1.5">
                         <MeuBotao
@@ -267,7 +272,7 @@ function EditarHorarios(props) {
                           hour={btn.hour}
                           handleClick={domingoHandleOnClick}
                         >
-                          {btn.hour}
+                          {btn.hours}
                         </MeuBotao>
                       </div>
                     </li>

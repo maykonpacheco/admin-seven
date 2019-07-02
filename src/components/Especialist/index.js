@@ -6,7 +6,6 @@ import { Link, withRouter } from 'react-router-dom';
 function Especialist(props) {
   const [key, setKey] = useState("");
   const [Especialista, setEspecialista] = useState([]);
-  const [Especialist, setEspecialist] = useState([]);
   
 
   
@@ -19,14 +18,18 @@ function Especialist(props) {
             const { nome, crm, especialidade } = doc.data();
             Especialist.push({
               key: doc.id,
-              nome, // DocumentSnapshot
+              doc, // DocumentSnapshot
+              nome, 
               crm,
               especialidade
             });
             setEspecialista({
               Especialista: doc.data()
             })
-           // console.log(doc.id, " => ", doc.data());
+            setKey({
+              key: doc.id
+            })
+            console.log(doc.id, " => ", doc.data());
           });
                    
       })
@@ -35,9 +38,10 @@ function Especialist(props) {
       });
     }, [props]);
 
-    console.log('Esse aqui =>=>', Especialista);
-    
+
+    console.log(Especialista)
 return (
+  
   <div>
     
     
@@ -62,11 +66,12 @@ return (
                 <th>Ação</th>
                 <th>Agenda</th>
               </tr>
-              {Especialist.map(Especialista =>
+              {Object.values(Especialista).map(i =>
+             
               <tr >
-                <td>{Especialista.nome}</td>
-                <td>{Especialista.crm}</td>
-                <td>{Especialista.especialidade}</td>
+                <td>{i.nome}</td>
+                <td>{i.crm}</td>
+                <td>{i.especialidade}</td>
                 <td><Link to={`/especialistShow/${Especialist.key}`}>Editar</Link></td>
                 <td><Link to={`../EditarHorarios/${Especialist.key}`} className="btn btn-secondary">Configurar</Link></td>
               </tr>  
