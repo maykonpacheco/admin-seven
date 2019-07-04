@@ -41,16 +41,21 @@ class Queries extends Component {
         description,
         author
       });
+         console.log(doc.id, " => ", doc.data());
     });
     this.setState({
       boards
     });
+    console.log("Aqui", boards)
+
   };
 
   componentDidMount() {
+    
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
+  
   render() {
     return (
       <div>
@@ -81,9 +86,7 @@ class Queries extends Component {
                       <td>{board.title}</td>
                       <td>{board.description}</td>
                       <td>{board.author}</td>
-                      <td>
-                        <Link to={`/show/${board.key}`}>Editar</Link>
-                      </td>
+                      <td> <Link to={`/show/${board.key}`}>Editar</Link> </td>
                     </tr>
                   ))}
                 </table>

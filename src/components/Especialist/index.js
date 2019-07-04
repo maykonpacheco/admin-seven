@@ -6,30 +6,35 @@ import { Link, withRouter } from 'react-router-dom';
 function Especialist(props) {
   const [key, setKey] = useState("");
   const [Especialista, setEspecialista] = useState([]);
-  
+  const [isLoading, SetIsLoading] =  useState(false)
+  const [Especialistas, setEspecialistas] = useState([]);
 
   
   useEffect(
     () => {
       const ref = firebase.firestore().collection('Especialist');
       ref.get().then(function(querySnapshot) {
-        const Especialist = [];
+        const Especialistas = [];
           querySnapshot.forEach(function(doc) {
             const { nome, crm, especialidade } = doc.data();
-            Especialist.push({
+            Especialistas.push({
               key: doc.id,
               doc, // DocumentSnapshot
-              nome, 
+              nome,
               crm,
               especialidade
             });
-            setEspecialista({
-              Especialista: doc.data()
-            })
             setKey({
               key: doc.id
             })
-            console.log(doc.id, " => ", doc.data());
+            setEspecialista({
+              Especialista: doc.data() 
+            })
+            SetIsLoading({
+              isLoading: false
+            })
+           // console.log(doc.id, " => ", doc.data());
+            console.log("Aqui Agora", Especialistas);
           });
                    
       })
@@ -39,7 +44,7 @@ function Especialist(props) {
     }, [props]);
 
 
-    console.log(Especialista)
+   // console.log("DIscord => ", Especialista)
 return (
   
   <div>
@@ -59,23 +64,21 @@ return (
         <div className="card-body">
           <div className="table-responsive">
             <table className="table table-bordered table-md">
-              <tr >   
+              <tr>   
                 <th>Nome</th>
                 <th>CRM</th>
                 <th>Especialidade</th>
-                <th>Ação</th>
                 <th>Agenda</th>
               </tr>
-              {Object.values(Especialista).map(i =>
+              {Object.values(Especialista).map(i  => ( 
              
               <tr >
                 <td>{i.nome}</td>
                 <td>{i.crm}</td>
                 <td>{i.especialidade}</td>
-                <td><Link to={`/especialistShow/${Especialist.key}`}>Editar</Link></td>
-                <td><Link to={`../EditarHorarios/${Especialist.key}`} className="btn btn-secondary">Configurar</Link></td>
+                <td><Link to={`../EditarHorarios/${key.key}`}>Configurar</Link></td>
               </tr>  
-              )}
+              ))}
             </table>
           </div>
         </div>

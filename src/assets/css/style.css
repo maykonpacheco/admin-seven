@@ -1327,15 +1327,15 @@ h6 .badge {
   color: #fff !important; }
 
 .btn-primary, .btn-primary.disabled {
-  box-shadow: 0 2px 6px #acb5f6;
-  background-color: #6777ef;
-  border-color: #6777ef; }
+  /*box-shadow: 0 2px 6px #f4b60b;*/
+  background-color: #f4b60b;
+  border-color: #f4b60b; }
   .btn-primary:focus, .btn-primary.disabled:focus {
-    background-color: #394eea !important; }
+    background-color: #f4b60b !important; }
     .btn-primary:focus:active, .btn-primary.disabled:focus:active {
-      background-color: #394eea !important; }
+      background-color: #f4b60b !important; }
   .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
-    background-color: #394eea !important; }
+    background-color: #5f6368 !important; }
 
 .btn-outline-primary, .btn-outline-primary.disabled {
   border-color: #6777ef;
