@@ -3,10 +3,9 @@ import firebase from '../../firebase';
 import Navbar from '../Navbar';
 import { Link, withRouter } from 'react-router-dom';
 
-function Especialist(props) {
+function Especialist(id) {
   const [key, setKey] = useState("");
   const [Especialista, setEspecialista] = useState([]);
-  const [isLoading, SetIsLoading] =  useState(false)
   const [Especialistas, setEspecialistas] = useState([]);
 
   
@@ -14,37 +13,30 @@ function Especialist(props) {
     () => {
       const ref = firebase.firestore().collection('Especialist');
       ref.get().then(function(querySnapshot) {
-        const Especialistas = [];
+        const Especialistasx = Especialistas;
           querySnapshot.forEach(function(doc) {
             const { nome, crm, especialidade } = doc.data();
-            Especialistas.push({
+            Especialistasx.push({
               key: doc.id,
               doc, // DocumentSnapshot
               nome,
               crm,
               especialidade
             });
-            setKey({
-              key: doc.id
-            })
-            setEspecialista({
-              Especialista: doc.data() 
-            })
-            SetIsLoading({
-              isLoading: false
-            })
+            
+          
            // console.log(doc.id, " => ", doc.data());
-            console.log("Aqui Agora", Especialistas);
+      //  console.log("Aqui Agora 1 ", Especialistas);
           });
                    
       })
       .catch(function(error) {
           console.log("Error getting documents: ", error);
       });
-    }, [props]);
+    }, [id]);
 
 
-   // console.log("DIscord => ", Especialista)
+ console.log("Aqui Agora => ", Especialistas)
 return (
   
   <div>
@@ -70,13 +62,14 @@ return (
                 <th>Especialidade</th>
                 <th>Agenda</th>
               </tr>
-              {Object.values(Especialista).map(i  => ( 
-             
+
+              {Object.values(Especialistas).map(i  => ( 
+              
               <tr >
                 <td>{i.nome}</td>
                 <td>{i.crm}</td>
                 <td>{i.especialidade}</td>
-                <td><Link to={`../EditarHorarios/${key.key}`}>Configurar</Link></td>
+                <td><Link to={`../EditarHorarios/${i.key}`}>Configurar</Link></td>
               </tr>  
               ))}
             </table>

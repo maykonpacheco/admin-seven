@@ -41,13 +41,13 @@ class Queries extends Component {
         description,
         author
       });
-         console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
     });
     this.setState({
       boards
     });
-    console.log("Aqui", boards)
-
+    
+    console.log(boards);
   };
 
   componentDidMount() {

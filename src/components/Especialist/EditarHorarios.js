@@ -158,15 +158,15 @@ function EditarHorarios(props) {
       setDomingo({
         domingo: especialista.domingo
       });
-          console.log(doc.id, " => ", doc.data());
+      setSegunda({
+        segunda: especialista.segunda
+      });
+         // console.log(doc.id, " => ", doc.data());
         } else {
           console.log("No such document!");
         }
       });
   }, [props]);
-
-  
-
 
 
   // Funções para subir para o Firebase
@@ -174,8 +174,6 @@ function EditarHorarios(props) {
   const handleCrmChange = e => setCrm(e.target.value);
   const handleEspecialidadeChange = e => setEspecialidade(e.target.value);
  
- 
-
 
   function onSubmit (e) {
     e.preventDefault();
@@ -199,6 +197,9 @@ function EditarHorarios(props) {
   setDomingo({
     domingo: ''
   });  
+  setSegunda({
+    segunda: ''
+  });  
   
     })
     .catch((error) => {
@@ -214,7 +215,7 @@ function EditarHorarios(props) {
   }
   function segundaHandleOnClick(index) {
     setSegunda(
-      segunda.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+      Object.values(segunda).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function tercaHandleOnClick(index) {
@@ -242,6 +243,7 @@ function EditarHorarios(props) {
       sabado.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
+
   return (
     <div className="CreateEspecialist">
       <Navbar />
@@ -263,17 +265,17 @@ function EditarHorarios(props) {
                   </li>
 
                   {Object.values(domingo).map((btn, i) => (
-                    
                     <li className="media">
                       <div class="media-body ml-1.5">
+                      
                         <MeuBotao
                           index={i}
                           value={btn.value}
                           hour={btn.hour}
                           handleClick={domingoHandleOnClick}
                         >
-                          {btn.hours}
                         </MeuBotao>
+                    
                       </div>
                     </li>
                   ))}
@@ -289,7 +291,7 @@ function EditarHorarios(props) {
                     </div>
                   </li>
 
-                  {segunda.map((btn, i) => (
+                  {Object.values(segunda).map((btn, i) => (
                     <li className="media">
                       <div class="media-body ml-1.5">
                         <MeuBotao
