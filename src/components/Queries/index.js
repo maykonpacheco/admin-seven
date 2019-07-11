@@ -64,9 +64,9 @@ class Queries extends Component {
           <div className="card">
             <div className="card-header">
               <h4> Lista de Consultas</h4>
-              <div class="card-header-action">
+              <div className="card-header-action">
                 <h4>
-                  <Link to="/create" class="btn btn-primary">
+                  <Link to="/create" className="btn btn-primary">
                     Adicionar Consulta
                   </Link>
                 </h4>

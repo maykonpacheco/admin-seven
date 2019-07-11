@@ -12,38 +12,30 @@ function Especialist(id) {
   useEffect(
     () => {
       const ref = firebase.firestore().collection('Especialist');
-      ref.get().then(function(querySnapshot) {
-        const Especialistasx = querySnapshot.reduce((acc, doc) => {
+      const Especialistasx = [];
+      ref.get().then(querySnapshot => {
+        if (querySnapshot.empty) {
+          console.log('No matching documents.');
+          return;
+        }
+        
+        querySnapshot.forEach(doc => {
           const { nome, crm, especialidade } = doc.data();
-          return [...acc, {
+          Especialistasx.push({
               key: doc.id,
               doc, // DocumentSnapshot
               nome,
               crm,
               especialidade
-            }];
-        }, []);
-//           querySnapshot.forEach(function(doc) {
-//             const { nome, crm, especialidade } = doc.data();
-//             Especialistasx.push({
-//               key: doc.id,
-//               doc, // DocumentSnapshot
-//               nome,
-//               crm,
-//               especialidade
-//             });    
-//           });
-          setEspecialistasx({
-            Especialistasx
-          });
-      })
-      .catch(function(error) {
+            });
+        });
+        setEspecialistas(Especialistasx);
+      }).catch(function(error) {
           console.log("Error getting documents: ", error);
       });
     }, [id]);
 
 
-// console.log("Aqui Agora => ", Especialistas)
 return (
   
   <div>
@@ -66,14 +58,18 @@ return (
                 <th>Agenda</th>
               </tr>
 
-              {Object.values(Especialistasx).map(el => ( 
-                <tr >
+              {!!Especialistas && Especialistas.map(el => ( 
+                <tr>
                   <td>{el.nome}</td>
                   <td>{el.crm}</td>
                   <td>{el.especialidade}</td>
                   <td><Link to={`../EditarHorarios/${el.key}`}>Configurar</Link></td>
                 </tr>  
               ))}
+              {/* // Para debugar e ver os dados que chega: */}
+              {/* {!!Especialistas && Especialistas.map(el => { 
+                console.log({...el})
+              })} */}
             </table>
           </div>
         </div>
