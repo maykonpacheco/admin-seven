@@ -13,25 +13,29 @@ function Especialist(id) {
     () => {
       const ref = firebase.firestore().collection('Especialist');
       ref.get().then(function(querySnapshot) {
-        const Especialistasx = [];
-          querySnapshot.forEach(function(doc) {
-            const { nome, crm, especialidade } = doc.data();
-            Especialistasx.push({
+        const Especialistasx = querySnapshot.reduce((acc, doc) => {
+          const { nome, crm, especialidade } = doc.data();
+          return [...acc, {
               key: doc.id,
               doc, // DocumentSnapshot
               nome,
               crm,
               especialidade
-            });    
-            setEspecialistasx({
-              Especialistasx
-            })
-            setEspecialistas({
-              Especialistas: doc.data()
-            })
-           // console.log(doc.id, " => ", doc.data());
-      console.log("Aqui Agora 1 ", Especialistasx);
-          });             
+            }];
+        }, []);
+//           querySnapshot.forEach(function(doc) {
+//             const { nome, crm, especialidade } = doc.data();
+//             Especialistasx.push({
+//               key: doc.id,
+//               doc, // DocumentSnapshot
+//               nome,
+//               crm,
+//               especialidade
+//             });    
+//           });
+          setEspecialistasx({
+            Especialistasx
+          });
       })
       .catch(function(error) {
           console.log("Error getting documents: ", error);
@@ -43,16 +47,12 @@ function Especialist(id) {
 return (
   
   <div>
-    
-    
     <Navbar />
-    
     <div className="col-md-12">
-    
       <div className="card">
         <div className="card-header">
-          <h4> Lista de Especialistas</h4>
-          <div class="card-header-action">
+          <h4>Lista de Especialistas</h4>
+          <div className="card-header-action">
           <h4><Link to="/CreateEspecialist" className="btn btn-primary">Adicionar Especialista</Link></h4>
         </div>
         </div>
@@ -66,14 +66,13 @@ return (
                 <th>Agenda</th>
               </tr>
 
-              {Object.values(Especialistasx).map(Especialistas  => ( 
-              
-              <tr >
-                <td>{Especialistas.nome}</td>
-                <td>{Especialistas.crm}</td>
-                <td>{Especialistas.especialidade}</td>
-                <td><Link to={`../EditarHorarios/${Especialistas.key}`}>Configurar</Link></td>
-              </tr>  
+              {Object.values(Especialistasx).map(el => ( 
+                <tr >
+                  <td>{el.nome}</td>
+                  <td>{el.crm}</td>
+                  <td>{el.especialidade}</td>
+                  <td><Link to={`../EditarHorarios/${el.key}`}>Configurar</Link></td>
+                </tr>  
               ))}
             </table>
           </div>
