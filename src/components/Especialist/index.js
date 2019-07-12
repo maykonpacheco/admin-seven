@@ -5,51 +5,46 @@ import { Link, withRouter } from 'react-router-dom';
 
 function Especialist(id) {
   const [key, setKey] = useState("");
-  const [Especialista, setEspecialista] = useState([]);
+  const [Especialistasx, setEspecialistasx] = useState([]);
   const [Especialistas, setEspecialistas] = useState([]);
 
   
   useEffect(
     () => {
       const ref = firebase.firestore().collection('Especialist');
-      ref.get().then(function(querySnapshot) {
-        const Especialistasx = Especialistas;
-          querySnapshot.forEach(function(doc) {
-            const { nome, crm, especialidade } = doc.data();
-            Especialistasx.push({
+      const Especialistasx = [];
+      ref.get().then(querySnapshot => {
+        if (querySnapshot.empty) {
+          console.log('No matching documents.');
+          return;
+        }
+        
+        querySnapshot.forEach(doc => {
+          const { nome, crm, especialidade } = doc.data();
+          Especialistasx.push({
               key: doc.id,
               doc, // DocumentSnapshot
               nome,
               crm,
               especialidade
             });
-            
-          
-           // console.log(doc.id, " => ", doc.data());
-      //  console.log("Aqui Agora 1 ", Especialistas);
-          });
-                   
-      })
-      .catch(function(error) {
+        });
+        setEspecialistas(Especialistasx);
+      }).catch(function(error) {
           console.log("Error getting documents: ", error);
       });
     }, [id]);
 
 
- console.log("Aqui Agora => ", Especialistas)
 return (
   
   <div>
-    
-    
     <Navbar />
-    
     <div className="col-md-12">
-    
       <div className="card">
         <div className="card-header">
-          <h4> Lista de Especialistas</h4>
-          <div class="card-header-action">
+          <h4>Lista de Especialistas</h4>
+          <div className="card-header-action">
           <h4><Link to="/CreateEspecialist" className="btn btn-primary">Adicionar Especialista</Link></h4>
         </div>
         </div>
@@ -63,15 +58,18 @@ return (
                 <th>Agenda</th>
               </tr>
 
-              {Object.values(Especialistas).map(i  => ( 
-              
-              <tr >
-                <td>{i.nome}</td>
-                <td>{i.crm}</td>
-                <td>{i.especialidade}</td>
-                <td><Link to={`../EditarHorarios/${i.key}`}>Configurar</Link></td>
-              </tr>  
+              {!!Especialistas && Especialistas.map(el => ( 
+                <tr>
+                  <td>{el.nome}</td>
+                  <td>{el.crm}</td>
+                  <td>{el.especialidade}</td>
+                  <td><Link to={`../EditarHorarios/${el.key}`}>Configurar</Link></td>
+                </tr>  
               ))}
+              {/* // Para debugar e ver os dados que chega: */}
+              {/* {!!Especialistas && Especialistas.map(el => { 
+                console.log({...el})
+              })} */}
             </table>
           </div>
         </div>

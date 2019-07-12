@@ -51,7 +51,6 @@ class Queries extends Component {
   };
 
   componentDidMount() {
-    
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
