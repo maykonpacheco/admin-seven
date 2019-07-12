@@ -75,6 +75,9 @@ class Login extends Component {
                           tabindex="1"
                           required
                           autofocus
+                          value={this.state.email} 
+                          onChange={this.handleChange} 
+                          value={this.state.email} 
                         />
                         <div class="invalid-feedback">
                           Please fill in your email
@@ -102,6 +105,8 @@ class Login extends Component {
                           name="password"
                           tabindex="2"
                           required
+                          value={this.state.password} 
+                          onChange={this.handleChange} 
                         />
                         <div class="invalid-feedback">
                           please fill in your password
@@ -112,6 +117,7 @@ class Login extends Component {
                           type="submit"
                           class="btn btn-primary btn-lg btn-block"
                           tabindex="4"
+                          onClick={this.login} id='button-signin'
                         >
                           Login
                         </button>

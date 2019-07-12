@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../../firebase';
 import Login from './Login';
-
+import Agendamentos from '../Agendamentos';
 
 class SignIn extends Component {
   constructor() {
@@ -32,7 +32,13 @@ class SignIn extends Component {
   render() {
     return (
       <div>
+            
+        {this.state.user ? (
+          <Agendamentos />
+        ) :
+          (
             <Login />
+          )}
       </div>
     );
   }

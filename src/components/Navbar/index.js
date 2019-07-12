@@ -8,6 +8,7 @@ import SentimentSatisfied from "@material-ui/icons/SentimentSatisfied";
 import AppsIcon from "@material-ui/icons/Apps";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from '@material-ui/core/IconButton';
+import firebase from "../../firebase";
 
 
 import { Link } from "react-router-dom";
@@ -15,6 +16,18 @@ import "../../assets/css/style.css";
 import "../../assets/css/components.css";
 
 import "./styles.css";
+class Logout extends Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  
+  }
+
+  logout() {
+    firebase.auth().signOut();
+  }
+}
+
 
 class Navbar extends Component {
   render() {
@@ -46,9 +59,9 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#">
-                  SAIR
-                </a>
+               
+              <button onClick={() => firebase.auth().signOut()}>Sign out</button>
+                 
               </li>
             </ul>
           </div>
