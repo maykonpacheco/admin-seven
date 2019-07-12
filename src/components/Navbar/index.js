@@ -15,16 +15,7 @@ import "../../assets/css/style.css";
 import "../../assets/css/components.css";
 
 import "./styles.css";
-class Logout extends Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
 
-  logout() {
-    firebase.auth().signOut();
-  }
-}
 
 class Navbar extends Component {
   render() {
@@ -56,7 +47,11 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="" onClick={() => firebase.auth().signOut()}>
+                <a
+                  class="nav-link"
+                  href=""
+                  onClick={() => firebase.auth().signOut()}
+                >
                   SAIR
                 </a>
               </li>
@@ -69,13 +64,3 @@ class Navbar extends Component {
 }
 
 export default Navbar;
-
-/*
-<div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><Link  to="/"><FontAwesomeIcon className="Um" icon={faUser} size="2x"  /></Link></div>
-              <div class="breadcrumb-item"><Link to='/Especialist' ><FontAwesomeIcon icon={faUser}  size="2x"   /></Link></div>
-              <div class="breadcrumb-item"><Link  to="/Queries"><FontAwesomeIcon icon={faHeart} size="2x"   /></Link></div>
-              
-            </div>
-
-            */

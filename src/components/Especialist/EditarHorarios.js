@@ -473,7 +473,7 @@ function EditarHorarios(props) {
                 <div />
 
                 <button type="submit" className="btn btn-success">
-                  Salvar
+                  Editar
                 </button>
               </form>
             </div>
