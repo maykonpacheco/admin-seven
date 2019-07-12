@@ -7,9 +7,8 @@ import BarChart from "@material-ui/icons/BarChart";
 import SentimentSatisfied from "@material-ui/icons/SentimentSatisfied";
 import AppsIcon from "@material-ui/icons/Apps";
 import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from "@material-ui/core/IconButton";
 import firebase from "../../firebase";
-
 
 import { Link } from "react-router-dom";
 import "../../assets/css/style.css";
@@ -20,14 +19,12 @@ class Logout extends Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
-  
   }
 
   logout() {
     firebase.auth().signOut();
   }
 }
-
 
 class Navbar extends Component {
   render() {
@@ -40,28 +37,28 @@ class Navbar extends Component {
               <li class="nav-item">
                 <Link class="nav-link" to="/">
                   <Tooltip title="Agendamentos">
-                      <BarChart />
+                    <BarChart />
                   </Tooltip>
                 </Link>
               </li>
               <li class="nav-item">
-              <Link class="nav-link" to="/Especialist">
+                <Link class="nav-link" to="/Especialist">
                   <Tooltip title="Especialistas">
-                      <SentimentSatisfied />
+                    <SentimentSatisfied />
                   </Tooltip>
                 </Link>
               </li>
               <li class="nav-item">
-              <Link class="nav-link" to="/Queries">
+                <Link class="nav-link" to="/Queries">
                   <Tooltip title="Consultas">
-                      <AppsIcon />
+                    <AppsIcon />
                   </Tooltip>
                 </Link>
               </li>
               <li class="nav-item">
-               
-              <button onClick={() => firebase.auth().signOut()}>Sign out</button>
-                 
+                <a class="nav-link" href="" onClick={() => firebase.auth().signOut()}>
+                  SAIR
+                </a>
               </li>
             </ul>
           </div>
