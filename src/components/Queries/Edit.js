@@ -63,29 +63,29 @@ class Edit extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
               Editar Consulta
             </h3>
           </div>
-          <div class="panel-body">
-            <h4><Link to={'/Queries'} class="btn btn-primary">Voltar</Link></h4>
+          <div className="panel-body">
+            <h4><Link to={'/Queries'} className="btn btn-primary">Voltar</Link></h4>
             <form onSubmit={this.onSubmit}>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="title">Nome:</label>
-                <input type="text" class="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="nome" />
+                <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="nome" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="description">Descrição:</label>
-                <input type="text" class="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="descrição" />
+                <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="descrição" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="author">Valor:</label>
-                <input type="text" class="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder="valor" />
+                <input type="text" className="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder="valor" />
               </div>
-              <button type="submit" class="btn btn-success">Salvar</button>
+              <button type="submit" className="btn btn-success">Salvar</button>
             </form>
           </div>
         </div>

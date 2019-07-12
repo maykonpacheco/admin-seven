@@ -40,8 +40,8 @@ function EditarHorarios(props) {
     { hour: "18:00", value: false },
     { hour: "19:00", value: false },
     { hour: "20:00", value: false }
-  
   ]);
+
   const [segunda, setSegunda] = useState([
     { hour: "07:00", value: false },
     { hour: "08:00", value: false },
@@ -141,42 +141,31 @@ function EditarHorarios(props) {
   
   useEffect(
     () => {
-
       const ref = firebase.firestore().collection('Especialist').doc(props.match.params.id);
       ref.get().then((doc) => {
         if (doc.exists) {
           const especialista = doc.data();
-          setNome({
-            nome: especialista.nome
-         });
-         setCrm({
-           crm: especialista.crm
-        });
-        setEspecialidade({
-         especialidade: especialista.especialidade
-      });
-      setDomingo({
-        domingo: especialista.domingo
-      });
-          console.log(doc.id, " => ", doc.data());
+          setNome(especialista.nome);
+          setCrm(especialista.crm);
+          setEspecialidade(especialista.especialidade);
+          setDomingo(especialista.domingo);
+          setSegunda(especialista.segunda);
+          setTerca(especialista.terca);
+          setQuarta(especialista.quarta);
+          setQuinta(especialista.quinta);
+          setSexta(especialista.sexta);
+          setSabado(especialista.sabado);
         } else {
           console.log("No such document!");
         }
       });
   }, [props]);
 
-  
-
-
-
   // Funções para subir para o Firebase
   const handleNomeChange = e => setNome(e.target.value);
   const handleCrmChange = e => setCrm(e.target.value);
   const handleEspecialidadeChange = e => setEspecialidade(e.target.value);
  
- 
-
-
   function onSubmit (e) {
     e.preventDefault();
     
@@ -185,21 +174,25 @@ function EditarHorarios(props) {
     updateRef.set({
       nome,
       crm,
-      especialidade
+      especialidade,
+      domingo,
+      segunda,
+      terca,
+      quarta,
+      quinta,
+      sexta,
+      sabado
     }).then((docRef) => {
-      setNome({
-        nome: ''
-     });
-     setCrm({
-       crm:''
-    });
-    setEspecialidade({
-     especialidade: ''
-  });
-  setDomingo({
-    domingo: ''
-  });  
-  
+      setNome('');
+      setCrm('');
+      setEspecialidade('');
+      setDomingo('');
+      setSegunda('');
+      setTerca('');
+      setQuarta('');
+      setQuinta('');
+      setSexta('');
+      setSabado('');
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -214,39 +207,39 @@ function EditarHorarios(props) {
   }
   function segundaHandleOnClick(index) {
     setSegunda(
-      segunda.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+       Object.values(segunda).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function tercaHandleOnClick(index) {
     setTerca(
-      terca.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+       Object.values(terca).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function quartaHandleOnClick(index) {
     setQuarta(
-      quarta.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+       Object.values(quarta).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function quintaHandleOnClick(index) {
     setQuinta(
-      quinta.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+       Object.values(quinta).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function sextaHandleOnClick(index) {
     setSexta(
-      sexta.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+       Object.values(sexta).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   function sabadoHandleOnClick(index) {
     setSabado(
-      sabado.map((b, i) => (i === index ? { ...b, value: !b.value } : b))
+       Object.values(sabado).map((b, i) => (i === index ? { ...b, value: !b.value } : b))
     );
   }
   return (
     <div className="CreateEspecialist">
       <Navbar />
-      <div class="panel-heading bodyhour">
-        <h3 class="panel-title">Editar Especialista</h3>
+      <div className="panel-heading bodyhour">
+        <h3 className="panel-title">Editar Especialista</h3>
       </div>
       <div className="bodyhour">
         <div className="col-md-14">
@@ -263,9 +256,8 @@ function EditarHorarios(props) {
                   </li>
 
                   {Object.values(domingo).map((btn, i) => (
-                    
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
@@ -279,45 +271,45 @@ function EditarHorarios(props) {
                   ))}
                 </ul>
               </div>
-              <div class="col-sm-1.5">
-                <ul class="list-unstyled list-unstyled-noborder mb-0">
-                  <li class="media">
-                    <div class="media-body ml-1.5">
-                      <button class="btn btn-secondary bodyschedule">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
                         SEGUNDA
                       </button>
                     </div>
                   </li>
 
-                  {segunda.map((btn, i) => (
+                  {Object.values(segunda).map((btn, i) => (
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
                           hour={btn.hour}
                           handleClick={segundaHandleOnClick}
                         >
-                          {btn.hour}
+                          {btn.hours}
                         </MeuBotao>
                       </div>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div class="col-sm-1.5">
-                <ul class="list-unstyled list-unstyled-noborder mb-0">
-                  <li class="media">
-                    <div class="media-body ml-1.5">
-                      <button class="btn btn-secondary bodyschedule">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
                         TERÇA
                       </button>
                     </div>
                   </li>
 
-                  {terca.map((btn, i) => (
+                  {Object.values(terca).map((btn, i) => (
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
@@ -331,19 +323,19 @@ function EditarHorarios(props) {
                   ))}
                 </ul>
               </div>
-              <div class="col-sm-1.5">
-                <ul class="list-unstyled list-unstyled-noborder mb-0">
-                  <li class="media">
-                    <div class="media-body ml-1.5">
-                      <button class="btn btn-secondary bodyschedule">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
                         QUARTA
                       </button>
                     </div>
                   </li>
 
-                  {quarta.map((btn, i) => (
+                  {Object.values(quarta).map((btn, i) => (
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
@@ -357,19 +349,19 @@ function EditarHorarios(props) {
                   ))}
                 </ul>
               </div>
-              <div class="col-sm-1.5">
-                <ul class="list-unstyled list-unstyled-noborder mb-0">
-                  <li class="media">
-                    <div class="media-body ml-1.5">
-                      <button class="btn btn-secondary bodyschedule">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
                         QUINTA
                       </button>
                     </div>
                   </li>
 
-                  {quinta.map((btn, i) => (
+                  {Object.values(quinta).map((btn, i) => (
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
@@ -383,19 +375,19 @@ function EditarHorarios(props) {
                   ))}
                 </ul>
               </div>
-              <div class="col-sm-1.5">
-                <ul class="list-unstyled list-unstyled-noborder mb-0">
-                  <li class="media">
-                    <div class="media-body ml-1.5">
-                      <button class="btn btn-secondary bodyschedule">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
                         SEXTA
                       </button>
                     </div>
                   </li>
 
-                  {sexta.map((btn, i) => (
+                  {Object.values(sexta).map((btn, i) => (
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
@@ -409,19 +401,19 @@ function EditarHorarios(props) {
                   ))}
                 </ul>
               </div>
-              <div class="col-sm-1.5">
-                <ul class="list-unstyled list-unstyled-noborder mb-0">
-                  <li class="media">
-                    <div class="media-body ml-1.5">
-                      <button class="btn btn-secondary bodyschedule">
+              <div className="col-sm-1.5">
+                <ul className="list-unstyled list-unstyled-noborder mb-0">
+                  <li className="media">
+                    <div className="media-body ml-1.5">
+                      <button className="btn btn-secondary bodyschedule">
                         SABADO
                       </button>
                     </div>
                   </li>
 
-                  {sabado.map((btn, i) => (
+                  {Object.values(sabado).map((btn, i) => (
                     <li className="media">
-                      <div class="media-body ml-1.5">
+                      <div className="media-body ml-1.5">
                         <MeuBotao
                           index={i}
                           value={btn.value}
@@ -441,47 +433,47 @@ function EditarHorarios(props) {
       </div>
 
       <div onSubmit={onSubmit}>
-        <div class="container">
-          <div class="panel panel-default">
-            <div class="panel-body">
+        <div className="container">
+          <div className="panel panel-default">
+            <div className="panel-body">
               <form>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="title">Nome:</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="name"
-                    value={nome.nome}
+                    value={nome}
                     onChange={handleNomeChange}
                     placeholder="nome"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="description">CRM:</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="CRM"
-                    value={crm.crm}
+                    value={crm}
                     onChange={handleCrmChange}
                     placeholder="CRM"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="description">Especialidade:</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="Especialidade"
-                    value={especialidade.especialidade}
+                    value={especialidade}
                     onChange={handleEspecialidadeChange}
                     placeholder="Ex: Cardiologia, Psicologia, Dermatologia... "
                   />
                 </div>
                 <div />
 
-                <button type="submit" class="btn btn-success">
-                  Adicionar
+                <button type="submit" className="btn btn-success">
+                  Editar
                 </button>
               </form>
             </div>

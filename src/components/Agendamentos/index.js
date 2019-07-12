@@ -8,27 +8,27 @@ class Agendamentos extends Component {
     return (
       <div>
        <Navbar />
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
+          <div className="col-md-12">
+            <div className="card">
+              <div className="card-header">
                 <h4>Agendamentos</h4>
-                <div class="card-header-action">
-                  <div class="btn-group">
-                    <a href="#" class="btn btn-primary">
+                <div className="card-header-action">
+                  <div className="btn-group">
+                    <a href="#" className="btn btn-primary">
                       Hoje
                     </a>
-                    <a href="#" class="btn btn-primary">
+                    <a href="#" className="btn btn-primary">
                       Semana
                     </a>
-                    <a href="#" class="btn btn-primary">
+                    <a href="#" className="btn btn-primary">
                       Mês
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered table-md">
+              <div className="card-body">
+                <div className="table-responsive">
+                  <table className="table table-bordered table-md">
                     <tr>
                       <th>#</th>
                       <th>Name</th>
@@ -41,10 +41,10 @@ class Agendamentos extends Component {
                       <td>Irwansyah Saputra</td>
                       <td>2017-01-09</td>
                       <td>
-                        <div class="badge badge-success">Active</div>
+                        <div className="badge badge-success">Active</div>
                       </td>
                       <td>
-                        <a href="#" class="btn btn-secondary">
+                        <a href="#" className="btn btn-secondary">
                           Detail
                         </a>
                       </td>
@@ -54,10 +54,10 @@ class Agendamentos extends Component {
                       <td>Rizal Fakhri</td>
                       <td>2017-01-11</td>
                       <td>
-                        <div class="badge badge-success">Active</div>
+                        <div className="badge badge-success">Active</div>
                       </td>
                       <td>
-                        <a href="#" class="btn btn-secondary">
+                        <a href="#" className="btn btn-secondary">
                           Detail
                         </a>
                       </td>

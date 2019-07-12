@@ -10,13 +10,13 @@ class Navbar extends Component {
     render() {
         return(
           <div >
-        <div class="section">
-          <div class="section-header">
+        <div className="section">
+          <div className="section-header">
             <h1>Seven</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><Link  to="/">Agendamentos</Link></div>
-              <div class="breadcrumb-item"><Link to='/Especialist' >Especialistas</Link></div>
-              <div class="breadcrumb-item"><Link  to="/Queries">Consultas</Link></div>
+            <div className="section-header-breadcrumb">
+              <div className="breadcrumb-item active"><Link  to="/">Agendamentos</Link></div>
+              <div className="breadcrumb-item"><Link to='/Especialist' >Especialistas</Link></div>
+              <div className="breadcrumb-item"><Link  to="/Queries">Consultas</Link></div>
             </div>
           </div>
           </div>

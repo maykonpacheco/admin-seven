@@ -48,29 +48,29 @@ class Create extends Component {
     return (
       <div>
         <Navbar />
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
               Adicionar Consultas
             </h3>
           </div>
-          <div class="panel-body">
-            <h4><Link to="/Queries" class="btn btn-primary">Voltar</Link></h4>
+          <div className="panel-body">
+            <h4><Link to="/Queries" className="btn btn-primary">Voltar</Link></h4>
             <form onSubmit={this.onSubmit}>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="title">Nome:</label>
-                <input type="text" class="form-control" name="title" value={title} onChange={this.onChange} placeholder="nome" />
+                <input type="text" className="form-control" name="title" value={title} onChange={this.onChange} placeholder="nome" />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="description">Descrição:</label>
-                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="descrição" cols="80" rows="3">{description}</textArea>
+                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="descrição" cols="80" rows="3">{description}</textArea>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="author">Valor:</label>
-                <input type="text" class="form-control" name="author" value={author} onChange={this.onChange} placeholder="valor" />
+                <input type="text" className="form-control" name="author" value={author} onChange={this.onChange} placeholder="valor" />
               </div>
-              <button type="submit" class="btn btn-success">Adicionar</button>
+              <button type="submit" className="btn btn-success">Adicionar</button>
             </form>
           </div>
         </div>

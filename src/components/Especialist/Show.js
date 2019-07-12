@@ -38,15 +38,15 @@ class especialistShow extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
           <h4><Link to="/Especialist">Especialista</Link></h4>
-            <h3 class="panel-title">
+            <h3 className="panel-title">
               {this.state.Especialist.nome}
             </h3>
           </div>
-          <div class="panel-body">
+          <div className="panel-body">
             <dl>
               <dt>Descrição:</dt>
               <dd>{this.state.Especialist.description}</dd>
@@ -55,8 +55,8 @@ class especialistShow extends Component {
               <dt>Escpelialidade:</dt>
               <dd>{this.state.Especialist.Especialidade}</dd>
             </dl>
-            <Link to={`/especialistEdit/${this.state.key}`} class="btn btn-success">Editar</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Deletar</button>
+            <Link to={`/especialistEdit/${this.state.key}`} className="btn btn-success">Editar</Link>&nbsp;
+            <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger">Deletar</button>
           </div>
         </div>
       </div>

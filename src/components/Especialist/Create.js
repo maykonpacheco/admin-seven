@@ -232,8 +232,8 @@ function CreateEspecialist(props) {
   return (
     <div className="CreateEspecialist">
       <Navbar />
-      <div class="panel-heading bodyhour">
-              <h3 class="panel-title">Adicionar Especialista</h3>
+      <div className="panel-heading bodyhour">
+              <h3 className="panel-title">Adicionar Especialista</h3>
       </div>
      <div className='bodyhour'>
       <div className="col-md-14">
@@ -251,7 +251,7 @@ function CreateEspecialist(props) {
                 
               {domingo.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -265,11 +265,11 @@ function CreateEspecialist(props) {
                       ))}
               </ul>
             </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
+            <div className="col-sm-1.5">
+              <ul className="list-unstyled list-unstyled-noborder mb-0">
+                <li className="media">
+                  <div className="media-body ml-1.5">
+                    <button className="btn btn-secondary bodyschedule">
                       SEGUNDA
                     </button>
                   </div>
@@ -277,7 +277,7 @@ function CreateEspecialist(props) {
                 
               {segunda.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -291,11 +291,11 @@ function CreateEspecialist(props) {
                       ))}
               </ul>
             </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
+            <div className="col-sm-1.5">
+              <ul className="list-unstyled list-unstyled-noborder mb-0">
+                <li className="media">
+                  <div className="media-body ml-1.5">
+                    <button className="btn btn-secondary bodyschedule">
                       TERÇA
                     </button>
                   </div>
@@ -303,7 +303,7 @@ function CreateEspecialist(props) {
                 
               {terca.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -317,11 +317,11 @@ function CreateEspecialist(props) {
                       ))}
               </ul>
             </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
+            <div className="col-sm-1.5">
+              <ul className="list-unstyled list-unstyled-noborder mb-0">
+                <li className="media">
+                  <div className="media-body ml-1.5">
+                    <button className="btn btn-secondary bodyschedule">
                       QUARTA
                     </button>
                   </div>
@@ -329,7 +329,7 @@ function CreateEspecialist(props) {
                 
               {quarta.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -343,11 +343,11 @@ function CreateEspecialist(props) {
                       ))}
               </ul>
             </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
+            <div className="col-sm-1.5">
+              <ul className="list-unstyled list-unstyled-noborder mb-0">
+                <li className="media">
+                  <div className="media-body ml-1.5">
+                    <button className="btn btn-secondary bodyschedule">
                       QUINTA
                     </button>
                   </div>
@@ -355,7 +355,7 @@ function CreateEspecialist(props) {
                 
               {quinta.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -369,11 +369,11 @@ function CreateEspecialist(props) {
                       ))}
               </ul>
             </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
+            <div className="col-sm-1.5">
+              <ul className="list-unstyled list-unstyled-noborder mb-0">
+                <li className="media">
+                  <div className="media-body ml-1.5">
+                    <button className="btn btn-secondary bodyschedule">
                       SEXTA
                     </button>
                   </div>
@@ -381,7 +381,7 @@ function CreateEspecialist(props) {
                 
               {sexta.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -395,11 +395,11 @@ function CreateEspecialist(props) {
                       ))}
               </ul>
             </div>
-            <div class="col-sm-1.5">
-              <ul class="list-unstyled list-unstyled-noborder mb-0">
-                <li class="media">
-                  <div class="media-body ml-1.5">
-                    <button class="btn btn-secondary bodyschedule">
+            <div className="col-sm-1.5">
+              <ul className="list-unstyled list-unstyled-noborder mb-0">
+                <li className="media">
+                  <div className="media-body ml-1.5">
+                    <button className="btn btn-secondary bodyschedule">
                       SABADO
                     </button>
                   </div>
@@ -407,7 +407,7 @@ function CreateEspecialist(props) {
                 
               {sabado.map((btn, i) => (
                 <li className="media">
-                  <div class="media-body ml-1.5">
+                  <div className="media-body ml-1.5">
                     <MeuBotao
                       index={i}
                       value={btn.value}
@@ -427,38 +427,38 @@ function CreateEspecialist(props) {
     </div>
     
     <div onSubmit={onSubmit}>
-        <div class="container">
-          <div class="panel panel-default">
+        <div className="container">
+          <div className="panel panel-default">
             
-            <div class="panel-body">
+            <div className="panel-body">
               <form>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="title">Nome:</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="name"
                     value={nome}
                     onChange={handleNomeChange}
                     placeholder="nome"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="description">CRM:</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="CRM"
                     value={crm}
                     onChange={handleCrmChange}
                     placeholder="CRM"
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="description">Especialidade:</label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     name="Especialidade"
                     value={especialidade}
                     onChange={handleEspecialidadeChange}                   
@@ -470,7 +470,7 @@ function CreateEspecialist(props) {
                 <button 
                 type="submit" 
               
-                class="btn btn-success"
+                className="btn btn-success"
                 >
                   Adicionar
                 </button>

@@ -64,29 +64,29 @@ class especialistEdit extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">
               Editar Especialista
             </h3>
           </div>
-          <div class="panel-body">
-            <h4><Link to={`/show/${this.state.key}`} class="btn btn-primary">Voltar</Link></h4>
+          <div className="panel-body">
+            <h4><Link to={`/show/${this.state.key}`} className="btn btn-primary">Voltar</Link></h4>
             <form onSubmit={this.onSubmit}>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="Nome">Nome:</label>
-                <input type="text" class="form-control" name="nome" value={this.state.nome} onChange={this.onChange} />
+                <input type="text" className="form-control" name="nome" value={this.state.nome} onChange={this.onChange} />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="CRM">CRM:</label>
-                <input type="text" class="form-control" name="crm" value={this.state.crm} onChange={this.onChange}  />
+                <input type="text" className="form-control" name="crm" value={this.state.crm} onChange={this.onChange}  />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="Especialidade">Especialidade:</label>
-                <input type="text" class="form-control" name="especialidade" value={this.state.especialidade} onChange={this.onChange} />
+                <input type="text" className="form-control" name="especialidade" value={this.state.especialidade} onChange={this.onChange} />
               </div>
-              <button type="submit" class="btn btn-success">Salvar</button>
+              <button type="submit" className="btn btn-success">Salvar</button>
             </form>
           </div>
         </div>
