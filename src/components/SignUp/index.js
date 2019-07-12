@@ -1,32 +1,25 @@
-import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
+import React, { useCallback } from "react";
+import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import firebase from "../../firebase";
-import { AuthContext } from "./Auth.js";
 
-  const Login = ({ history }) => {
-    const handleLogin = useCallback(
-      async event => {
-        event.preventDefault();
-        const { email, password } = event.target.elements;
-        try {
-          await firebase
-            .auth()
-            .signInWithEmailAndPassword(email.value, password.value);
-          history.push("/");  
-        } catch (error) {
-          alert(error);
-        }
-      },
-      [history]
-    );
-  
-    const { currentUser } = useContext(AuthContext);
-  
-    if (currentUser) {
-      return <Redirect to="/" />;
-    }
-  
+
+ 
+const SignUp = ({ history }) => {
+    const handleSignUp = useCallback(async event => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email.value, password.value);
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
+    }, [history]);
+
+
     return (
       <div id="app">
         <section class="section">
@@ -44,7 +37,7 @@ import { AuthContext } from "./Auth.js";
 
                   <div class="card-body">
                     <form 
-                      onSubmit={handleLogin}
+                      onSubmit={handleSignUp}
                       method="POST"
                       action="#"
                       class="needs-validation"
@@ -97,6 +90,7 @@ import { AuthContext } from "./Auth.js";
                           type="submit"
                           class="btn btn-primary btn-lg btn-block"
                           tabindex="4"
+                          onClick={this.login} id='button-signin'
                         >
                           Login
                         </button>
@@ -121,5 +115,5 @@ import { AuthContext } from "./Auth.js";
     );
   }
 
-  export default withRouter(Login);
+  export default withRouter(SignUp);
 
