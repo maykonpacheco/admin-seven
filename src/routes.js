@@ -15,12 +15,13 @@ import EditarHorarios from './components/Especialist/EditarHorarios';
 
 import Agendamentos from './components/Agendamentos';
 
+import SignIn from "./components/Login";
+
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import firebase from './firebase';
 
-import SignIn from './components/Login';
 
 export default function Routes () {
   
