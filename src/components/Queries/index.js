@@ -76,14 +76,12 @@ class Queries extends Component {
                 <table className="table table-bordered table-md">
                   <tr>
                     <th>Nome</th>
-                    <th>Descrição</th>
                     <th>Valor </th>
                     <th>Ação</th>
                   </tr>
                   {this.state.boards.map(board => (
                     <tr>
                       <td>{board.title}</td>
-                      <td>{board.description}</td>
                       <td>{board.author}</td>
                       <td> <Link to={`/show/${board.key}`}>Editar</Link> </td>
                     </tr>

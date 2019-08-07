@@ -53,8 +53,6 @@ class Show extends Component {
           </div>
           <div className="panel-body">
             <dl>
-              <dt>Descrição:</dt>
-              <dd>{this.state.board.description}</dd>
               <dt>Valor:</dt>
               <dd>{this.state.board.author}</dd>
             </dl>

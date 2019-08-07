@@ -9,7 +9,6 @@ class Edit extends Component {
     this.state = {
       key: '',
       title: '',
-      description: '',
       author: ''
     };
   }
@@ -40,18 +39,16 @@ class Edit extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, description, author } = this.state;
+    const { title, author } = this.state;
 
     const updateRef = firebase.firestore().collection('boards').doc(this.state.key);
     updateRef.set({
       title,
-      description,
       author
     }).then((docRef) => {
       this.setState({
         key: '',
         title: '',
-        description: '',
         author: ''
       });
       this.props.history.push("/show/"+this.props.match.params.id)
@@ -76,10 +73,6 @@ class Edit extends Component {
               <div className="form-group">
                 <label for="title">Nome:</label>
                 <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="nome" />
-              </div>
-              <div className="form-group">
-                <label for="description">Descrição:</label>
-                <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="descrição" />
               </div>
               <div className="form-group">
                 <label for="author">Valor:</label>

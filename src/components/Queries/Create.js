@@ -11,7 +11,6 @@ class Create extends Component {
     this.ref = firebase.firestore().collection('boards');
     this.state = {
       title: '',
-      description: '',
       author: ''
     };
   }
@@ -24,16 +23,14 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, description, author } = this.state;
+    const { title, author } = this.state;
 
     this.ref.add({
       title,
-      description,
       author
     }).then((docRef) => {
       this.setState({
         title: '',
-        description: '',
         author: ''
       });
       this.props.history.push("/")
@@ -44,7 +41,7 @@ class Create extends Component {
   }
 
   render() {
-    const { title, description, author } = this.state;
+    const { title, author } = this.state;
     return (
       <div>
         <Navbar />
@@ -61,10 +58,6 @@ class Create extends Component {
               <div className="form-group">
                 <label for="title">Nome:</label>
                 <input type="text" className="form-control" name="title" value={title} onChange={this.onChange} placeholder="nome" />
-              </div>
-              <div className="form-group">
-                <label for="description">Descrição:</label>
-                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="descrição" cols="80" rows="3">{description}</textArea>
               </div>
               <div className="form-group">
                 <label for="author">Valor:</label>
