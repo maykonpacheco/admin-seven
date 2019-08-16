@@ -60,18 +60,16 @@ class Agendamentos extends Component {
           <div className="col-md-12">
             <div className="card">
               <div className="card-header">
-                <h4>Agendamentos</h4>
+                <h4>Agendamentos do dia</h4>
                 <div className="card-header-action">
                   <div className="btn-group">
                     <a href="#" className="btn btn-primary">
                       Hoje
                     </a>
                     <a href="#" className="btn btn-primary">
-                      Semana
+                      Agenda
                     </a>
-                    <a href="#" className="btn btn-primary">
-                      Mês
-                    </a>
+                   
                   </div>
                 </div>
               </div>
@@ -82,7 +80,8 @@ class Agendamentos extends Component {
                       <th>Horário</th>
                       <th>Paciênte</th>
                       <th>Convênio</th> 
-                      <th>Médico</th>                     
+                      <th>Médico</th>
+                      <th>status</th>                       
                     </tr>
                     {this.state.Agendamento.map(i => (       
                     <tr>
@@ -90,6 +89,7 @@ class Agendamentos extends Component {
                       <td>{i.email}</td>
                       <td>Particular</td>
                       <td>{i.nome}</td>
+                      <td>Agendado</td>
                     </tr>
                     ))} 
                   </table>
